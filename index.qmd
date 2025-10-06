@@ -97,7 +97,7 @@ Comprehensive wage analysis examining:
 
 ## Expected Findings
 
-This analysis will reveal whether political geography significantly influences gender-based employment outcomes, particularly in emerging high-wage sectors like AI and technology.
+We expect this analysis will reveal that political geography influences gender-based employment outcomes, particularly in emerging high-wage sectors such as AI and technology. 
 
 ## Methodology
 
