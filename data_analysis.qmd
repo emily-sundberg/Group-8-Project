@@ -22,7 +22,7 @@ spark = SparkSession.builder.appName("LightcastData").getOrCreate()
 jobs_df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/lightcast_job_postings.csv")
 jobs_df.createOrReplaceTempView("job_postings")
 
-elections_df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/countypres_2000-2024.csv")
+elections_df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/2024_election_results.csv")
 elections_df.createOrReplaceTempView("election_results")
 
 #print("---This is Diagnostic check, No need to print it in the final doc---")
@@ -37,19 +37,43 @@ elections_df.show(5)
 
 ```{python}
 # casting corrected variable type
-jobs_df = df.withColumn("SALARY_FROM", col ("SALARY_FROM").cast("float"))\
+jobs_df = jobs_df.withColumn("SALARY_FROM", col ("SALARY_FROM").cast("float"))\
   .withColumn("SALARY_TO", col("SALARY_TO").cast("float")) \
   .withColumn("MAX_YEARS_EXPERIENCE", col("MAX_YEARS_EXPERIENCE").cast("float"))\
   .withColumn("MIN_YEARS_EXPERIENCE", col("MIN_YEARS_EXPERIENCE").cast("float"))\
   .withColumn("SALARY", col("SALARY").cast("float"))
 
+# Clean Up education columns
+jobs_df = jobs_df.withColumn("EDUCATION_LEVELS_NAME", regexp_replace(col("EDUCATION_LEVELS_NAME"), "[\n\r]", ""))
+#jobs_df = jobs_df.select("EDUCATION_LEVELS_NAME")
+jobs_df.show(15)
+
+# Compute Median Salary
+def compute_median(sdf, col_name):
+  q = sdf.approxQuantile(col_name, [0.5], 0.01)
+  return q[0] if q else None
+
+
+median_from = compute_median(jobs_df, "SALARY_FROM")
+median_to = compute_median(jobs_df, "SALARY_TO")
+median_salary = compute_median(jobs_df,"SALARY")
+
+print("Medians:", median_from, median_to, median_salary)
 
 ```
 
 
 ```{python}
+from pyspark.sql import functions as F
 
+jobs_df = jobs_df.withColumn("STATE_ABBREVIATION", F.trim(F.split(jobs_df["COUNTY_NAME"], ",").getItem(1)))
 
+jobs_df = jobs_df.join(
+    elections_df,
+    jobs_df.STATE_ABBREVIATION == elections_df.STATE,
+    "left"
+)
 
+jobs_df.show(15)
 ```
 
