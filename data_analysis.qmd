@@ -19,7 +19,7 @@ pio.renderers.default = "notebook"
 
 spark = SparkSession.builder.appName("LightcastData").getOrCreate()
 
-df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/lightcast_job_postings.csv")
+df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/lightcast_job_postings.csv")
 df.createOrReplaceTempView("job_postings")
 
 #print("---This is Diagnostic check, No need to print it in the final doc---")
@@ -28,3 +28,4 @@ df.createOrReplaceTempView("job_postings")
 df.show(5)
 
 ```
+
