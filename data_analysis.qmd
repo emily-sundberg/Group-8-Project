@@ -19,13 +19,37 @@ pio.renderers.default = "notebook"
 
 spark = SparkSession.builder.appName("LightcastData").getOrCreate()
 
-df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/lightcast_job_postings.csv")
+jobs_df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/lightcast_job_postings.csv")
 df.createOrReplaceTempView("job_postings")
+
+elections_df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("/home/ubuntu/Group-8-Project/data/countypres_2000-2024.csv")
+df.createOrReplaceTempView("election_results")
 
 #print("---This is Diagnostic check, No need to print it in the final doc---")
 
 #df.printSchema() # comment this line when rendering the submission
-df.show(5)
+jobs_df.show(5)
+elections_df.show(5)
+
+```
+
+# Data Cleaning
+
+```{python}
+# casting corrected variable type
+jobs_df = df.withColumn("SALARY_FROM", col ("SALARY_FROM").cast("float"))\
+  .withColumn("SALARY_TO", col("SALARY_TO").cast("float")) \
+  .withColumn("MAX_YEARS_EXPERIENCE", col("MAX_YEARS_EXPERIENCE").cast("float"))\
+  .withColumn("MIN_YEARS_EXPERIENCE", col("MIN_YEARS_EXPERIENCE").cast("float"))\
+  .withColumn("SALARY", col("SALARY").cast("float"))
+
+
+```
+
+
+```{python}
+
+
 
 ```
 
