@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About This Project",
+    "section": "",
+    "text": "This project examines the complex relationship between gender disparities in employment, hiring patterns, wage gaps, and political geography across the United States. We pay particular attention to representation in AI and technology fields."
+  },
+  {
+    "objectID": "about.html#research-focus",
+    "href": "about.html#research-focus",
+    "title": "About This Project",
+    "section": "",
+    "text": "This project examines the complex relationship between gender disparities in employment, hiring patterns, wage gaps, and political geography across the United States. We pay particular attention to representation in AI and technology fields."
+  },
+  {
+    "objectID": "about.html#our-four-core-questions",
+    "href": "about.html#our-four-core-questions",
+    "title": "About This Project",
+    "section": "Our Four Core Questions",
+    "text": "Our Four Core Questions\n\nHiring Patterns: How do men and women fare differently in hiring across various industries?\nPolitical Geography: Do employment disparities correlate with state political affiliations (red vs. blue states)?\nAI Sector Focus: Is women’s underrepresentation in AI fields more pronounced in conservative states?\nWage Analysis: How do gender wage gaps vary across different political contexts?"
+  },
+  {
+    "objectID": "about.html#why-this-matters",
+    "href": "about.html#why-this-matters",
+    "title": "About This Project",
+    "section": "Why This Matters",
+    "text": "Why This Matters\n\nAI and tech sectors are rapidly growing and high-paying\nPolitical policies at state level impact workplace equality\nUnderstanding regional differences can inform policy decisions\nIdentifying barriers helps create targeted interventions"
+  },
+  {
+    "objectID": "about.html#methodology",
+    "href": "about.html#methodology",
+    "title": "About This Project",
+    "section": "Methodology",
+    "text": "Methodology\nOur analysis will include:\n\nData Sources:\n\nBureau of Labor Statistics employment data\nState-level political affiliation data\nIndustry-specific hiring and salary information\nAI/tech sector demographics\n\nAnalytical Approach:\n\nStatistical analysis of hiring patterns\nGeographic mapping of disparities\nCorrelation analysis between political affiliation and employment outcomes\nComparative analysis across industries"
+  },
+  {
+    "objectID": "about.html#team",
+    "href": "about.html#team",
+    "title": "About This Project",
+    "section": "Team",
+    "text": "Team\nGroup 8 - AD 688 Web Analytics\n\nPranathi Nagasai\nEmily Sundberg\n[Other team members]"
+  },
+  {
+    "objectID": "about.html#course-information",
+    "href": "about.html#course-information",
+    "title": "About This Project",
+    "section": "Course Information",
+    "text": "Course Information\nBoston University Metropolitan College\nAD 688: Web Analytics\nFall 2025"
+  },
+  {
+    "objectID": "about.html#timeline",
+    "href": "about.html#timeline",
+    "title": "About This Project",
+    "section": "Timeline",
+    "text": "Timeline\n\nData collection and cleaning\nExploratory data analysis\nStatistical modeling\nVisualization development\nFinal report and presentation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "This research investigates the intersection of gender-based employment patterns and political geography in the United States.\n\n\n\n\nWe analyze gender representation and hiring trends across multiple sectors:\n\nTechnology Sector: Software development, AI/ML, data science\nHealthcare: Medical professionals, administrative roles\nFinance: Banking, investment, fintech\nManufacturing: Production, engineering, management\nService Industries: Retail, hospitality, education\n\nKey metrics examined: - Hiring rates by gender - Retention rates - Promotion patterns - Industry-specific barriers\n\n\n\nExamining state-level political affiliations and their relationship with:\n\nRed States (Conservative-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nBlue States (Liberal-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nSwing States: Comparative analysis of mixed political environments\n\n\n\n\nFocused investigation on the technology sector, specifically:\n\nAI and Machine Learning roles\n\nData scientists\nML engineers\nAI researchers\n\nWomen’s representation comparison:\n\nConservative states (red states)\nLiberal states (blue states)\nNational averages\n\nFactors analyzed:\n\nEducational pipeline differences\nCompany culture and policies\nState-level STEM initiatives\nIndustry concentration by state\n\n\n\n\n\nComprehensive wage analysis examining:\n\nGender wage gaps across:\n\nRed states\nBlue states\nSwing states\n\nIndustry-specific wage disparities:\n\nTech and AI fields\nHealthcare\nFinance\nManufacturing\n\nControlling for:\n\nExperience level\nEducation\nJob title/role\nCompany size\nCost of living adjustments\n\nPolitical affiliation impact:\n\nState minimum wage policies\nEqual pay legislation\nWorkplace protection laws\n\n\n\n\n\n\nThis analysis will reveal whether political geography significantly influences gender-based employment outcomes, particularly in emerging high-wage sectors like AI and technology.\n\n\n\n[Your data sources and analytical methods will go here]\n\n\n\n[Interactive charts and graphs will be added here]\n\n\n\n[Research findings will be presented here]"
+  },
+  {
+    "objectID": "index.html#research-questions",
+    "href": "index.html#research-questions",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "We analyze gender representation and hiring trends across multiple sectors:\n\nTechnology Sector: Software development, AI/ML, data science\nHealthcare: Medical professionals, administrative roles\nFinance: Banking, investment, fintech\nManufacturing: Production, engineering, management\nService Industries: Retail, hospitality, education\n\nKey metrics examined: - Hiring rates by gender - Retention rates - Promotion patterns - Industry-specific barriers\n\n\n\nExamining state-level political affiliations and their relationship with:\n\nRed States (Conservative-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nBlue States (Liberal-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nSwing States: Comparative analysis of mixed political environments\n\n\n\n\nFocused investigation on the technology sector, specifically:\n\nAI and Machine Learning roles\n\nData scientists\nML engineers\nAI researchers\n\nWomen’s representation comparison:\n\nConservative states (red states)\nLiberal states (blue states)\nNational averages\n\nFactors analyzed:\n\nEducational pipeline differences\nCompany culture and policies\nState-level STEM initiatives\nIndustry concentration by state\n\n\n\n\n\nComprehensive wage analysis examining:\n\nGender wage gaps across:\n\nRed states\nBlue states\nSwing states\n\nIndustry-specific wage disparities:\n\nTech and AI fields\nHealthcare\nFinance\nManufacturing\n\nControlling for:\n\nExperience level\nEducation\nJob title/role\nCompany size\nCost of living adjustments\n\nPolitical affiliation impact:\n\nState minimum wage policies\nEqual pay legislation\nWorkplace protection laws"
+  },
+  {
+    "objectID": "index.html#expected-findings",
+    "href": "index.html#expected-findings",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "This analysis will reveal whether political geography significantly influences gender-based employment outcomes, particularly in emerging high-wage sectors like AI and technology."
+  },
+  {
+    "objectID": "index.html#methodology",
+    "href": "index.html#methodology",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "[Your data sources and analytical methods will go here]"
+  },
+  {
+    "objectID": "index.html#data-visualizations",
+    "href": "index.html#data-visualizations",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "[Interactive charts and graphs will be added here]"
+  },
+  {
+    "objectID": "index.html#conclusions",
+    "href": "index.html#conclusions",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "[Research findings will be presented here]"
+  }
+]

@@ -1,0 +1,114 @@
+---
+title: "Gender Disparities in Hiring & Political Influence"
+author: "Pranathi Nagasai & Team"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    code-fold: true
+---
+
+# Gender Disparities in Hiring & Political Influence
+
+This research investigates the intersection of gender-based employment patterns and political geography in the United States.
+
+## Research Questions
+
+### 1. How do hiring patterns differ for men vs. women across industries?
+
+We analyze gender representation and hiring trends across multiple sectors:
+
+- **Technology Sector**: Software development, AI/ML, data science
+- **Healthcare**: Medical professionals, administrative roles
+- **Finance**: Banking, investment, fintech
+- **Manufacturing**: Production, engineering, management
+- **Service Industries**: Retail, hospitality, education
+
+Key metrics examined:
+- Hiring rates by gender
+- Retention rates
+- Promotion patterns
+- Industry-specific barriers
+
+### 2. Do gender-based employment disparities vary between red and blue states?
+
+Examining state-level political affiliations and their relationship with:
+
+- **Red States (Conservative-leaning)**
+  - Gender hiring ratios
+  - Workplace policies
+  - Wage structures
+  
+- **Blue States (Liberal-leaning)**
+  - Gender hiring ratios
+  - Workplace policies
+  - Wage structures
+
+- **Swing States**: Comparative analysis of mixed political environments
+
+### 3. Are women more underrepresented in AI fields in conservative states vs. liberal states?
+
+Focused investigation on the technology sector, specifically:
+
+- **AI and Machine Learning roles**
+  - Data scientists
+  - ML engineers
+  - AI researchers
+  
+- **Women's representation comparison**:
+  - Conservative states (red states)
+  - Liberal states (blue states)
+  - National averages
+
+- **Factors analyzed**:
+  - Educational pipeline differences
+  - Company culture and policies
+  - State-level STEM initiatives
+  - Industry concentration by state
+
+### 4. How do wage gaps compare between gender and political affiliations?
+
+Comprehensive wage analysis examining:
+
+- **Gender wage gaps** across:
+  - Red states
+  - Blue states
+  - Swing states
+  
+- **Industry-specific wage disparities**:
+  - Tech and AI fields
+  - Healthcare
+  - Finance
+  - Manufacturing
+  
+- **Controlling for**:
+  - Experience level
+  - Education
+  - Job title/role
+  - Company size
+  - Cost of living adjustments
+
+- **Political affiliation impact**:
+  - State minimum wage policies
+  - Equal pay legislation
+  - Workplace protection laws
+
+## Expected Findings
+
+This analysis will reveal whether political geography significantly influences gender-based employment outcomes, particularly in emerging high-wage sectors like AI and technology.
+
+## Methodology
+
+[Your data sources and analytical methods will go here]
+
+## Data Visualizations
+
+[Interactive charts and graphs will be added here]
+
+## Conclusions
+
+[Research findings will be presented here]
+
+---

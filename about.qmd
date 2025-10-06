@@ -1,0 +1,62 @@
+---
+title: "About This Project"
+---
+
+## Research Focus
+
+This project examines the complex relationship between gender disparities in employment, hiring patterns, wage gaps, and political geography across the United States. We pay particular attention to representation in AI and technology fields.
+
+## Our Four Core Questions
+
+1. **Hiring Patterns**: How do men and women fare differently in hiring across various industries?
+
+2. **Political Geography**: Do employment disparities correlate with state political affiliations (red vs. blue states)?
+
+3. **AI Sector Focus**: Is women's underrepresentation in AI fields more pronounced in conservative states?
+
+4. **Wage Analysis**: How do gender wage gaps vary across different political contexts?
+
+## Why This Matters
+
+- AI and tech sectors are rapidly growing and high-paying
+- Political policies at state level impact workplace equality
+- Understanding regional differences can inform policy decisions
+- Identifying barriers helps create targeted interventions
+
+## Methodology
+
+Our analysis will include:
+
+- **Data Sources**: 
+  - Bureau of Labor Statistics employment data
+  - State-level political affiliation data
+  - Industry-specific hiring and salary information
+  - AI/tech sector demographics
+
+- **Analytical Approach**:
+  - Statistical analysis of hiring patterns
+  - Geographic mapping of disparities
+  - Correlation analysis between political affiliation and employment outcomes
+  - Comparative analysis across industries
+
+## Team
+
+**Group 8 - AD 688 Web Analytics**
+
+- Pranathi Nagasai
+- Emily Sundberg
+- [Other team members]
+
+## Course Information
+
+Boston University Metropolitan College  
+AD 688: Web Analytics  
+Fall 2025
+
+## Timeline
+
+- Data collection and cleaning
+- Exploratory data analysis
+- Statistical modeling
+- Visualization development
+- Final report and presentation
