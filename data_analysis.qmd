@@ -28,8 +28,8 @@ elections_df.createOrReplaceTempView("election_results")
 #print("---This is Diagnostic check, No need to print it in the final doc---")
 
 #df.printSchema() # comment this line when rendering the submission
-jobs_df.show(5)
-elections_df.show(5)
+#jobs_df.show(5)
+#elections_df.show(5)
 
 ```
 
@@ -43,7 +43,7 @@ jobs_df = jobs_df.withColumn("SALARY_FROM", col ("SALARY_FROM").cast("float"))\
   .withColumn("MIN_YEARS_EXPERIENCE", col("MIN_YEARS_EXPERIENCE").cast("float"))\
   .withColumn("SALARY", col("SALARY").cast("float"))
 
-# Clean Up education columns
+# Clean Up Columns
 jobs_df = jobs_df.withColumn("EDUCATION_LEVELS_NAME", regexp_replace(col("EDUCATION_LEVELS_NAME"), "[\n\r]", ""))
 jobs_df = jobs_df.withColumn("SOURCE_TYPES", regexp_replace(col("SOURCE_TYPES"), "[\n\r]", ""))
 jobs_df = jobs_df.withColumn("SOURCES", regexp_replace(col("SOURCES"), "[\n\r]", ""))
@@ -114,7 +114,7 @@ null_counts = jobs_df.select([
 columns_to_keep = [c for c, nulls in null_counts.items() if nulls <= missing_threshold or c == "SALARY"]
 jobs_df = jobs_df.select(columns_to_keep)
 
-jobs_df.show(15)
+#jobs_df.show(15)
 
 ```
 
@@ -136,7 +136,7 @@ jobs_df = jobs_df.drop(F.col("elections.STATE"))
 
 jobs_df = jobs_df.withColumnRenamed("Affiliation", "AFFILIATION")
 
-jobs_df.show(15)
+#jobs_df.show(15)
 ```
 
 
@@ -185,6 +185,8 @@ selected_df = jobs_df.select(
 pdf = selected_df.toPandas()
 
 pdf.to_csv("./data/lightcast_cleaned.csv", index=False)
+
+pdf.show(15)
 
 print("Data Cleaning Complete. Rows retained:", len(pdf))
 
