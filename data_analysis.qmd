@@ -66,7 +66,7 @@ def compute_median(sdf, col_name):
 
 median_from = compute_median(jobs_df, "SALARY_FROM")
 median_to = compute_median(jobs_df, "SALARY_TO")
-median_salary = compute_median(jobs_df,"SALARY")
+median_salary = compute_median(jobs_df, "SALARY")
 
 print("Medians:", median_from, median_to, median_salary)
 
@@ -75,6 +75,12 @@ jobs_df = jobs_df.fillna({
   "SALARY_TO": median_to,
   "SALARY": median_salary
 })
+
+from pyspark.sql.functions import col
+jobs_df = jobs_df.withColumn(
+    "MIDPOINT_SALARY",
+    (col("SALARY_TO") + col("SALARY_FROM")) / 2
+)
 
 # Dropping unnecessary columns
 columns_to_drop = [
@@ -105,7 +111,7 @@ missing_threshold = total_rows * 0.5
 null_counts = jobs_df.select([
     (spark_sum(col(c).isNull().cast("int"))).alias(c) for c in jobs_df.columns
 ]).collect()[0].asDict()
-columns_to_keep = [c for c, nulls in null_counts.items() if nulls <= missing_threshold]
+columns_to_keep = [c for c, nulls in null_counts.items() if nulls <= missing_threshold or c == "SALARY"]
 jobs_df = jobs_df.select(columns_to_keep)
 
 jobs_df.show(15)
@@ -128,6 +134,69 @@ jobs_df = jobs_alias.join(
 )
 jobs_df = jobs_df.drop(F.col("elections.STATE"))
 
+jobs_df = jobs_df.withColumnRenamed("Affiliation", "AFFILIATION")
+
 jobs_df.show(15)
 ```
 
+
+
+```{python}
+selected_df = jobs_df.select(
+  "EDUCATION_LEVELS_NAME",
+  "MIN_EDULEVELS_NAME",
+  "EMPLOYMENT_TYPE_NAME",
+  "MIN_YEARS_EXPERIENCE",
+  "SALARY_TO",
+  "SALARY_FROM",
+  "SALARY",
+  "CITY_NAME",
+  "MSA_NAME",
+  "STATE_NAME",
+  "NAICS2_NAME",
+  "NAICS3_NAME",
+  "NAICS4_NAME",
+  "NAICS5_NAME",
+  "NAICS6_NAME",
+  "SKILLS_NAME",
+  "SPECIALIZED_SKILLS_NAME",
+  "CERTIFICATIONS_NAME",
+  "COMMON_SKILLS_NAME",
+  "SOFTWARE_SKILLS_NAME",
+  "ONET_NAME",
+  "LOT_CAREER_AREA_NAME",
+  "LOT_OCCUPATION_NAME",
+  "LOT_SPECIALIZED_OCCUPATION_NAME",
+  "LOT_OCCUPATION_GROUP_NAME",
+  "LOT_V6_SPECIALIZED_OCCUPATION_NAME",
+  "LOT_V6_OCCUPATION_NAME",
+  "LOT_V6_OCCUPATION_GROUP_NAME",
+  "LOT_V6_CAREER_AREA_NAME",
+  "SOC_2_NAME",
+  "SOC_3_NAME",
+  "SOC_4_NAME",
+  "SOC_5_NAME",
+  "REMOTE_GROUP",
+  "STATE_ABBREVIATION",
+  "AFFILIATION",
+  "MIDPOINT_SALARY"
+)
+
+pdf = selected_df.toPandas()
+
+pdf.to_csv("./data/lightcast_cleaned.csv", index=False)
+
+print("Data Cleaning Complete. Rows retained:", len(pdf))
+
+```
+
+# Exploratory Data Analysis
+
+## Salary Distribution by State
+
+```{python}
+
+
+
+
+```
