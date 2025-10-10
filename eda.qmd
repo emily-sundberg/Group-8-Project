@@ -62,20 +62,30 @@ salary_by_affiliation = (
 pdf = salary_by_affiliation.toPandas()
 
 # visualize the data
-plt.figure(figsize=(12,6))
-sns.barplot(
-    data=pdf,
+fig = px.bar(
+    pdf,
     x="NAICS2_NAME",
     y="avg_salary",
-    hue="AFFILIATION",
-    palette="coolwarm"
+    color="AFFILIATION",
+    barmode="group",
+    hover_data=["median_salary", "count"], 
+    labels={
+        "NAICS2_NAME": "Industry (NAICS2)",
+        "avg_salary": "Average Salary",
+        "AFFILIATION": "Political Affiliation"
+    },
+    title="Average Salary by Industry and Political Affiliation"
 )
-plt.xticks(rotation=45, ha="right")
-plt.title("Average Salary by Industry and Political Affiliation")
-plt.xlabel("Industry (NAICS2)")
-plt.ylabel("Average Salary")
-plt.tight_layout()
-plt.show()
+
+fig.update_layout(
+    xaxis_tickangle=-45,
+    yaxis_title="Average Salary",
+    xaxis_title="Industry (NAICS2)",
+    legend_title="Affiliation",
+    template="plotly_white"
+)
+
+fig.show()
 
 ```
 
@@ -170,7 +180,7 @@ ai_jobs = eda.filter(
     F.col("ONET_NAME").rlike(pattern)
 )
 
-ai_jobs.select("MIN_EDULEVELS_NAME","LOT_OCCUPATION_NAME", "SKILLS_NAME", "SALARY", "STATE_ABBREVIATION","AFFILIATION").show(10, truncate=False)
+ai_jobs.select("MIN_EDULEVELS_NAME","LOT_OCCUPATION_NAME", "SKILLS_NAME", "SALARY", "STATE_ABBREVIATION","AFFILIATION","NAICS2_NAME","NAICS3_NAME","NAICS4_NAME","NAICS5_NAME","NAICS6_NAME").show(10, truncate=False)
 ```
 
 ```{python}
@@ -270,6 +280,64 @@ fig.update_layout(
     xaxis_title="Number of Job Postings",
     yaxis_title="State",
     legend_title="Affiliation"
+)
+
+fig.show()
+```
+
+
+```{python}
+import plotly.express as px
+from pyspark.sql import functions as F
+
+ai_naics = (ai_jobs.filter(col("NAICS2_NAME") =="Professional, Scientific, and Technical Services")
+)
+
+naics_levels = ["NAICS4_NAME", "NAICS5_NAME", "NAICS6_NAME"]
+
+ai_naicscounts_dfs = []
+for level in naics_levels:
+    df = (
+        ai_naics.groupBy(level)
+           .agg(F.count("*").alias("count"))
+           .withColumnRenamed(level, "Industry")
+           .withColumn("NAICS_Level", F.lit(level))
+    )
+    ai_naicscounts_dfs.append(df)
+
+combined_ai_naicscounts = ai_naicscounts_dfs[0]
+for df in ai_naicscounts_dfs[1:]:
+    combined_ai_naicscounts = combined_ai_naicscounts.union(df)
+
+combined_ai_naicscounts = combined_ai_naicscounts.orderBy(F.desc("count"))
+
+
+ai_naics_combined = combined_ai_naicscounts.toPandas()
+
+ai_naics_combined
+
+```
+
+
+```{python}
+fig = px.bar(
+    ai_naics_combined,
+    x="Industry",
+    y="count",
+    color="NAICS_Level",
+    barmode="group",
+    hover_data=["NAICS_Level", "count"],
+    title="Job Posting Counts Across NAICS Levels 2–6",
+    labels={"count": "Job Postings", "Industry": "Industry", "NAICS_Level": "NAICS Level"}
+)
+
+# Rotate x-axis labels for readability
+fig.update_layout(
+    xaxis_tickangle=-45,
+    yaxis_title="Number of Job Postings",
+    xaxis_title="Industry",
+    template="plotly_white",
+    legend_title="NAICS Level"
 )
 
 fig.show()

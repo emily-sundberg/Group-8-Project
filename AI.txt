@@ -317,3 +317,99 @@ Would you like me to tailor that keyword list specifically for AI + data jobs (e
 That can make your filter far more precise.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Input:
+please write a code that provides data visualization with a side by side comparison of the count of job postings for each NAICS2, 3, 4, 5, and 6 
+
+ChatGPT said:
+
+Absolutely! We can create a side-by-side comparison of job posting counts across NAICS levels 2–6. Since you want counts by industry at each NAICS level, we can aggregate in PySpark and then use Plotly to make a grouped bar chart for each level.
+
+Here’s a clean approach:
+
+import plotly.express as px
+from pyspark.sql import functions as F
+
+# --- List of NAICS levels ---
+naics_levels = ["NAICS2_NAME", "NAICS3_NAME", "NAICS4_NAME", "NAICS5_NAME", "NAICS6_NAME"]
+
+# --- Aggregate counts for each NAICS level ---
+counts_dfs = []
+for level in naics_levels:
+    df = (
+        eda.groupBy(level)
+           .agg(F.count("*").alias("count"))
+           .withColumnRenamed(level, "Industry")
+           .withColumn("NAICS_Level", F.lit(level))
+    )
+    counts_dfs.append(df)
+
+# --- Combine all levels into a single DataFrame ---
+combined_counts = counts_dfs[0]
+for df in counts_dfs[1:]:
+    combined_counts = combined_counts.union(df)
+
+# Convert to Pandas for Plotly
+combined_pd = combined_counts.toPandas()
+
+# Optional: pick top 10 industries per NAICS level for clarity
+combined_pd = combined_pd.groupby("NAICS_Level").apply(lambda x: x.nlargest(10, "count")).reset_index(drop=True)
+
+# --- Plotly grouped bar chart ---
+fig = px.bar(
+    combined_pd,
+    x="Industry",
+    y="count",
+    color="NAICS_Level",
+    barmode="group",
+    hover_data=["NAICS_Level", "count"],
+    title="Job Posting Counts Across NAICS Levels 2–6",
+    labels={"count": "Job Postings", "Industry": "Industry", "NAICS_Level": "NAICS Level"}
+)
+
+# Rotate x-axis labels for readability
+fig.update_layout(
+    xaxis_tickangle=-45,
+    yaxis_title="Number of Job Postings",
+    xaxis_title="Industry",
+    template="plotly_white",
+    legend_title="NAICS Level"
+)
+
+fig.show()
+
+✅ What this does
+
+Counts job postings for each NAICS2–6 level.
+
+Combines them into a single DataFrame with a NAICS_Level column.
+
+Plots a grouped bar chart with Plotly:
+
+x-axis = Industry name
+
+y-axis = Count of job postings
+
+color = NAICS level
+
+hover info = shows level and count.
+
+Shows top 10 industries per level to prevent overcrowding.
+
+If you want, I can also make a horizontal version where industries are on the y-axis — it’s usually much cleaner for long names and multiple NAICS levels.
+
+Do you want me to do that?
