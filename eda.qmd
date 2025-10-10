@@ -36,5 +36,241 @@ eda.show(15)
 
 ```
 
+# Exploring the Salary by State Political Affiliation
+
+```{python}
+from pyspark.sql import functions as F
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+eda = eda.na.drop(subset=["AFFILIATION"])
+
+# Aggregate the Data 
+salary_by_affiliation = (
+    eda.groupBy("AFFILIATION","NAICS2_NAME")
+      .agg(
+          F.mean("SALARY").alias("avg_salary"),
+          F.expr("percentile_approx(SALARY, 0.5)").alias("median_salary"),
+          F.count("*").alias("count")
+      )
+      .orderBy("avg_salary", ascending=False)
+)
+
+#salary_by_affiliation.show()
+
+pdf = salary_by_affiliation.toPandas()
+
+# visualize the data
+plt.figure(figsize=(12,6))
+sns.barplot(
+    data=pdf,
+    x="NAICS2_NAME",
+    y="avg_salary",
+    hue="AFFILIATION",
+    palette="coolwarm"
+)
+plt.xticks(rotation=45, ha="right")
+plt.title("Average Salary by Industry and Political Affiliation")
+plt.xlabel("Industry (NAICS2)")
+plt.ylabel("Average Salary")
+plt.tight_layout()
+plt.show()
+
+```
+
+This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation. 
+
+# Exploring the minimum education level by political affiliation
 
 
+```{python}
+import plotly.express as px
+
+# Aggregate the Data 
+edulevel_by_affiliation = (
+    eda.groupBy("AFFILIATION","MIN_EDULEVELS_NAME")
+      .agg(
+           F.count("*").alias("count"),
+          F.mean("SALARY").alias("avg_salary")
+      )
+)
+
+edulevel_by_affiliation.show()
+
+pdf = edulevel_by_affiliation.toPandas()
+
+# visualize the data
+fig = px.bar(
+    pdf,
+    x="MIN_EDULEVELS_NAME",
+    y="count",
+    color="AFFILIATION",
+    barmode="group",
+    title="Education Level Requirements by Political Affiliation",
+    hover_data=["avg_salary"],  # optional: show avg salary on hover
+    color_discrete_map={"Blue": "#1f77b4", "Red": "#d62728"}
+)
+
+fig.update_layout(
+    xaxis_title="Minimum Education Level",
+    yaxis_title="Number of Postings",
+    template="plotly_white"
+)
+
+fig.show()
+
+```
+
+This graph shows us the comparison of job postings by political affiliation and minimum education level. As you can see, red states have far more job postings for lower education levels such as High School, Associate Degree, or Bachelor's degree, and blue states have more postings requiring a Master's Degree or higher. 
+
+```{python}
+fig = px.bar(
+    pdf,
+    x="MIN_EDULEVELS_NAME",
+    y="avg_salary",
+    color="AFFILIATION",
+    barmode="group",
+    title="Average Salary by Education Level and Political Affiliation",
+    hover_data=["count"],
+    color_discrete_map={"Blue": "#1f77b4", "Red": "#d62728"}
+)
+
+fig.update_layout(
+    xaxis_title="Minimum Education Level",
+    yaxis_title="Average Salary (USD)",
+    template="plotly_white"
+)
+
+fig.show()
+```
+
+This figure tells us that despite red states having more job postings with education level requirements below a Master's degree, the salaries in Blue states are higher for every single minimum education level. This could be attributed to a higher cost of living in most blue states. 
+
+# AI Jobs Analysis
+
+```{python}
+from pyspark.sql import functions as F
+
+ai_keywords = [
+    "artificial intelligence", "machine learning", "deep learning",
+    "neural network", "nlp", "natural language processing",
+    "computer vision", "data science", "data scientist",
+    "ai engineer", "ai research", "ml engineer",
+    "tensorflow", "pytorch", "keras", "hugging face", "openai", "scikit-learn"
+]
+pattern = "|".join([f"(?i){kw}" for kw in ai_keywords])
+
+ai_jobs = eda.filter(
+    F.col("SKILLS_NAME").rlike(pattern) |
+    F.col("SPECIALIZED_SKILLS_NAME").rlike(pattern) |
+    F.col("SOFTWARE_SKILLS_NAME").rlike(pattern) |
+    F.col("COMMON_SKILLS_NAME").rlike(pattern) |
+    F.col("LOT_OCCUPATION_NAME").rlike(pattern) |
+    F.col("ONET_NAME").rlike(pattern)
+)
+
+ai_jobs.select("MIN_EDULEVELS_NAME","LOT_OCCUPATION_NAME", "SKILLS_NAME", "SALARY", "STATE_ABBREVIATION","AFFILIATION").show(10, truncate=False)
+```
+
+```{python}
+import plotly.express as px
+
+# Aggregate the Data 
+ai_job_analysis = (
+    ai_jobs.groupBy("AFFILIATION","MIN_EDULEVELS_NAME")
+      .agg(
+           F.count("*").alias("count"),
+          F.mean("SALARY").alias("avg_salary")
+      )
+)
+
+ai_job_analysis.show()
+
+ai_pdf = ai_job_analysis.toPandas()
+
+# visualize the data
+fig = px.bar(
+    ai_pdf,
+    x="MIN_EDULEVELS_NAME",
+    y="count",
+    color="AFFILIATION",
+    barmode="group",
+    title="AI jobs Education Level Requirements by Political Affiliation",
+    hover_data=["avg_salary"],
+    color_discrete_map={"Blue": "#1f77b4", "Red": "#d62728"}
+)
+
+fig.update_layout(
+    xaxis_title="Minimum Education Level",
+    yaxis_title="Number of Postings",
+    template="plotly_white"
+)
+
+fig.show()
+
+```
+
+This figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of  AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.
+
+```{python}
+fig = px.bar(
+    ai_pdf,
+    x="MIN_EDULEVELS_NAME",
+    y="avg_salary",
+    color="AFFILIATION",
+    barmode="group",
+    title="AI Jobs Average Salary by Education Level and Political Affiliation",
+    hover_data=["count"], 
+    color_discrete_map={"Blue": "#1f77b4", "Red": "#d62728"}
+)
+
+fig.update_layout(
+    xaxis_title="Minimum Education Level",
+    yaxis_title="Average Salary (USD)",
+    template="plotly_white"
+)
+
+fig.show()
+```
+
+Similarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states. 
+
+
+```{python}
+state_counts = (
+    ai_jobs.groupBy("STATE_ABBREVIATION", "AFFILIATION")
+       .agg(
+           F.count("*").alias("count"),
+           F.mean("SALARY").alias("avg_salary")
+       )
+       .orderBy(F.desc("count"))
+)
+state_counts.show(10, truncate=False)
+
+state_counts_pd = state_counts.toPandas()
+
+import plotly.express as px
+
+state_counts_pd_sorted = state_counts_pd.sort_values("count", ascending=True)
+
+fig = px.bar(
+    state_counts_pd_sorted,
+    x="count",
+    y="STATE_ABBREVIATION",
+    orientation="h",
+    color="AFFILIATION",
+    hover_data=["avg_salary"],  # Show average salary on hover
+    title="Number of AI Job Postings by State and Affiliation",
+    labels={"count": "Job Postings", "STATE_ABBREVIATION": "State"}
+)
+
+fig.update_layout(
+    yaxis={'categoryorder':'total ascending'},
+    xaxis_title="Number of Job Postings",
+    yaxis_title="State",
+    legend_title="Affiliation"
+)
+
+fig.show()
+```

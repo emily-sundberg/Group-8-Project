@@ -35,6 +35,7 @@ elections_df.createOrReplaceTempView("election_results")
 
 ```
 
+
 # Data Cleaning
 
 ```{python}
