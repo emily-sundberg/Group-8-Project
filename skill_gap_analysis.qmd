@@ -1,0 +1,113 @@
+---
+title: "Skills Gap Analysis"
+format:
+  html:
+    theme: cerulean
+    toc: false
+
+execute:
+  echo: false
+  eval: true
+  output: true
+  freeze: auto
+---
+
+```{python}
+import pandas as pd
+import plotly.express as px
+import plotly.io as pio
+from pyspark.sql import SparkSession
+import re
+import numpy as np
+import plotly.graph_objects as go
+from pyspark.sql.functions import col, split, explode, regexp_replace, transform, when
+from pyspark.sql import functions as F
+from pyspark.sql.functions import col, monotonically_increasing_id
+
+np.random.seed(42)
+
+pio.renderers.default = "notebook"
+
+spark = SparkSession.builder.appName("LightcastData").getOrCreate()
+
+jobs_df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("./data/lightcast_job_postings.csv")
+jobs_df.createOrReplaceTempView("job_postings")
+
+#print("---This is Diagnostic check, No need to print it in the final doc---")
+
+#df.printSchema() # comment this line when rendering the submission
+#jobs_df.show(5)
+#elections_df.show(5)
+
+
+```
+
+
+```{python}
+import pandas as pd
+
+skills_data = {
+    "Name": ["Emily","Pranathi"],
+    "Python": [2,1],
+    "Java" :[2,1],
+    "SQL": [2,1],
+    "Power BI": [4,4],
+    "Machine Learning": [1,1],
+    "Cloud Computing": [2,2]
+}
+
+df_skills = pd.DataFrame(skills_data)
+df_skills.set_index("Name", inplace=True)
+df_skills
+```
+
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(df_skills, annot=True, cmap="RdYlGn", linewidths=0.5)
+plt.title("Team Skill Levels Heatmap")
+plt.show()
+```
+
+```{python}
+# view_cols = [
+#   "BODY",
+#   "SKILLS_NAME",
+#   "SPECIALIZED_SKILLS_NAME",
+#   "CERTIFICATIONS_NAME",
+#   "COMMON_SKILLS_NAME",
+#   "SOFTWARE_SKILLS_NAME"
+# ]
+
+# for colname in view_cols:
+#   print(f"\n----{colname} ----")
+#   jobs_df.select(colname).distinct().show(60,truncate = False)
+```
+
+
+```{python}
+from collections import Counter
+
+skills_pd = jobs_df.select("SKILLS_NAME").toPandas()
+
+top_skills = ["Python","Java","Power BI","Machine Learning","Cloud Computing"]
+
+skill_counts = Counter()
+for skill in top_skills:
+    skill_counts[skill] = skills_pd['SKILLS_NAME'].str.contains(skill, case=False, regex=True).sum()
+
+job_skill_counts = Counter(top_skills)
+
+for skill in top_skills:
+    if skill not in df_skills.columns:
+        df_skills[skill] = 0  
+
+df_skills.loc["Job Postings Count"] = [skill_counts.get(skill, 0) for skill in df_skills.columns]
+
+df_skills
+```
+
+Based on our Skills Gap Analysis, we need to work on our Python skills. In order to be more competitive in the job market, we will finish the Python DataCamp and practice incorporating our new skills into our current roles. 
