@@ -1,4 +1,6 @@
-
+---
+title: "Data Cleaning"
+---
 # Load the dataset
 
 ```{python}
@@ -119,6 +121,7 @@ jobs_df = jobs_df.select(columns_to_keep)
 ```
 
 
+
 ```{python}
 from pyspark.sql import functions as F
 
@@ -182,11 +185,140 @@ selected_df = jobs_df.select(
   "MIDPOINT_SALARY"
 )
 
+from pyspark.sql.functions import countDistinct
+
+selected_df.select([
+  countDistinct(c).alias(c+"_nunique")
+  for c in selected_df.columns
+]).show(truncate=False)
+
+# Education Levels
+
+selected_df = selected_df.withColumn(
+  "EDUCATION_LEVELS_NAME",
+    when(col("EDUCATION_LEVELS_NAME").isNull(), "No Education Listed")
+    .otherwise(col("EDUCATION_LEVELS_NAME"))
+)
+
+# Min Edu Levels
+
+selected_df = selected_df.withColumn(
+  "MIN_EDULEVELS_NAME",
+    when(col("MIN_EDULEVELS_NAME").isNull(), "No Education Listed")
+    .otherwise(col("MIN_EDULEVELS_NAME"))
+)
+
+# Employment Type Name
+
+selected_df = selected_df.withColumn(
+  "EMPLOYMENT_TYPE_NAME",
+    when(col("EMPLOYMENT_TYPE_NAME") == "Part-time / full-time","Flexible")
+    .when(col("EMPLOYMENT_TYPE_NAME") == "Part-time (â‰¤ 32 hours)","Part-Time")
+    .when(col("EMPLOYMENT_TYPE_NAME") == "Full-time (> 32 hours)","Full-Time")
+    .when(col("EMPLOYMENT_TYPE_NAME").isNull(), "Full-Time")
+    .otherwise(col("EMPLOYMENT_TYPE_NAME"))
+)
+
+# Min Years Experience
+selected_df = selected_df.withColumn(
+    "MIN_YEARS_EXPERIENCE",
+    when(col("MIN_YEARS_EXPERIENCE").isNull(), 0)
+    .otherwise(col("MIN_YEARS_EXPERIENCE"))
+)
+
+# Salary to
+selected_df = selected_df.withColumn(
+    "SALARY_TO",
+    when(col("SALARY_TO").isNull(), median_to)
+    .otherwise(col("SALARY_TO"))
+)
+
+# Salary from
+selected_df = selected_df.withColumn(
+    "SALARY_FROM",
+    when(col("SALARY_FROM").isNull(), median_from)
+    .otherwise(col("SALARY_FROM"))
+)
+
+# Salary 
+selected_df = selected_df.withColumn(
+    "SALARY",
+    when(col("SALARY").isNull(), median_salary)
+    .otherwise(col("SALARY"))
+)
+
+# City Name
+selected_df = selected_df.withColumn(
+  "CITY_NAME",
+    when(col("CITY_NAME").isNull(), "Unknown")
+    .otherwise(col("CITY_NAME"))
+)
+
+# MSA Name
+selected_df = selected_df.withColumn(
+  "MSA_NAME",
+    when(col("MSA_NAME").isNull(), "Unknown")
+    .otherwise(col("MSA_NAME"))
+)
+
+# State Name
+selected_df = selected_df.withColumn(
+  "STATE_NAME",
+    when(col("STATE_NAME").isNull(), "Unknown")
+    .otherwise(col("STATE_NAME"))
+)
+
+# NAICS2_NAME 
+selected_df = selected_df.withColumn(
+  "NAICS2_NAME",
+    when(col("NAICS2_NAME").isNull(), "Unknown")
+    .otherwise(col("NAICS2_NAME"))
+)
+
+# NAICS3_NAME 
+selected_df = selected_df.withColumn(
+  "NAICS3_NAME",
+    when(col("NAICS3_NAME").isNull(), "Unknown")
+    .otherwise(col("NAICS3_NAME"))
+)
+
+# NAICS4_NAME 
+selected_df = selected_df.withColumn(
+  "NAICS4_NAME",
+    when(col("NAICS4_NAME").isNull(), "Unknown")
+    .otherwise(col("NAICS4_NAME"))
+)
+
+# NAICS5_NAME 
+selected_df = selected_df.withColumn(
+  "NAICS5_NAME",
+    when(col("NAICS5_NAME").isNull(), "Unknown")
+    .otherwise(col("NAICS5_NAME"))
+)
+
+# NAICS6_NAME 
+selected_df = selected_df.withColumn(
+  "NAICS6_NAME",
+    when(col("NAICS6_NAME").isNull(), "Unknown")
+    .otherwise(col("NAICS6_NAME"))
+)
+
+#STATE ABBREVIATION
+selected_df = selected_df.withColumn(
+  "STATE_ABBREVIATION",
+    when(col("STATE_ABBREVIATION").isNull(), "Unknown")
+    .otherwise(col("STATE_ABBREVIATION"))
+)
+
+```
+
+
+```{python}
 pdf = selected_df.toPandas()
 
 pdf.to_csv("./data/lightcast_cleaned.csv", index=False)
 
-pdf.show(15)
+pdf.head(15)
 
 print("Data Cleaning Complete. Rows retained:", len(pdf))
 
