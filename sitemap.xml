@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://emily-sundberg.github.io/Group-8-Project/about.html</loc>
-    <lastmod>2025-10-06T17:02:07.764Z</lastmod>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/eda.html</loc>
+    <lastmod>2025-10-11T16:42:02.843Z</lastmod>
   </url>
   <url>
-    <loc>https://emily-sundberg.github.io/Group-8-Project/data_analysis.html</loc>
-    <lastmod>2025-10-06T17:02:07.764Z</lastmod>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/nlp_methods.html</loc>
+    <lastmod>2025-10-11T16:42:02.843Z</lastmod>
+  </url>
+  <url>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/skill_gap_analysis.html</loc>
+    <lastmod>2025-10-11T16:42:02.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/ml_methods.html</loc>
+    <lastmod>2025-10-11T16:42:02.843Z</lastmod>
   </url>
   <url>
     <loc>https://emily-sundberg.github.io/Group-8-Project/index.html</loc>
-    <lastmod>2025-10-06T17:02:07.764Z</lastmod>
+    <lastmod>2025-10-11T16:42:02.843Z</lastmod>
+  </url>
+  <url>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/about.html</loc>
+    <lastmod>2025-10-11T16:42:02.842Z</lastmod>
+  </url>
+  <url>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/introduction.html</loc>
+    <lastmod>2025-10-11T16:42:02.843Z</lastmod>
+  </url>
+  <url>
+    <loc>https://emily-sundberg.github.io/Group-8-Project/data_cleaning.html</loc>
+    <lastmod>2025-10-11T16:42:02.842Z</lastmod>
   </url>
 </urlset>
