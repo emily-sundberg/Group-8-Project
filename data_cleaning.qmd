@@ -3,12 +3,16 @@ title: "Data Cleaning"
 format:
   html:
     code-overflow: wrap
+    code-fold: true
 execute:
   echo: true
   eval: false
   freeze: auto
 ---
-# Load the dataset
+
+## Load the dataset
+
+This code initializes a PySpark environment to load and explore a dataset of job postings. It begins by importing and starting a Spark session named "`JobPostingsAnalysis`", then reads a CSV file (`lightcast_job_postings.csv`) into a Spark DataFrame with headers, schema inference, and support for multi-line fields. The DataFrame is registered as a temporary SQL view called "`job_postings`" to enable SQL-style queries. Finally, it performs a basic diagnostic check by printing the schema and previewing the first five rows of data—steps that are intended for local debugging and should be commented out when rendering the final submission.
 
 ```{python}
 import pandas as pd
@@ -200,8 +204,14 @@ import pandas as pd
 from pyspark.sql.functions import col, sum as spark_sum, when, trim, length
 import hvplot.pandas
 
+df_sample_viz = selected_df.select(
+  "MIN_YEARS_EXPERIENCE",
+  "SALARY",
+  "MSA_NAME",
+  "NAICS5_NAME"
+)
 
-df_sample = selected_df.sample(fraction = .05, seed = 42).toPandas()
+df_sample = df_sample_viz.sample(fraction = .15, seed = 42).toPandas()
 
 missing_mask = df_sample.isnull()
 
@@ -219,7 +229,7 @@ missing = missing_long.hvplot.heatmap(
   cmap = "Blues",
   width = 900,
   height = 500,
-  title = "Heatmap of Missing Values (5%)"
+  title = "Heatmap of Missing Values (15%)"
 ).opts(xrotation=45)
 
 hvplot.save(missing, './output/missing_heatmap.html')
