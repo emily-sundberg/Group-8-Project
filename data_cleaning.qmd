@@ -1,5 +1,12 @@
 ---
 title: "Data Cleaning"
+format:
+  html:
+    code-overflow: wrap
+execute:
+  echo: true
+  eval: false
+  freeze: auto
 ---
 # Load the dataset
 
@@ -188,8 +195,7 @@ selected_df = jobs_df.select(
 ```
 
 ```{python}
-#| echo: true
-#| eval: false
+
 import pandas as pd
 from pyspark.sql.functions import col, sum as spark_sum, when, trim, length
 import hvplot.pandas
@@ -227,8 +233,7 @@ hvplot.save(missing, './output/missing_heatmap.html')
 
 
 ```{python}
-#| echo: true
-#| eval: false
+
 
 from pyspark.sql.functions import countDistinct
 
@@ -359,8 +364,7 @@ selected_df = selected_df.withColumn(
 
 
 ```{python}
-#| echo: true
-#| eval: false
+
 
 pdf = selected_df.toPandas()
 
