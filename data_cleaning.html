@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the dataset</h2>
 <p>This code initializes a PySpark environment to load and explore a dataset of job postings. It begins by importing and starting a Spark session named “<code>JobPostingsAnalysis</code>”, then reads a CSV file (<code>lightcast_job_postings.csv</code>) into a Spark DataFrame with headers, schema inference, and support for multi-line fields. The DataFrame is registered as a temporary SQL view called “<code>job_postings</code>” to enable SQL-style queries. Finally, it performs a basic diagnostic check by printing the schema and previewing the first five rows of data—steps that are intended for local debugging and should be commented out when rendering the final submission.</p>
-<div id="50577aaf" class="cell" data-execution_count="1">
+<div id="3ead9475" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-cleaning" class="level1">
 <h1>Data Cleaning</h1>
-<div id="a7aa2a2c" class="cell" data-execution_count="2">
+<div id="c7382780" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># casting corrected variable type</span></span>
@@ -320,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co">#jobs_df.show(15)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="40033814" class="cell" data-execution_count="3">
+<div id="f4991e0e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
@@ -342,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#jobs_df.show(15)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="8da25c3e" class="cell" data-execution_count="4">
+<div id="0285fb90" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>selected_df <span class="op">=</span> jobs_df.select(</span>
@@ -386,7 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="d920dbf2" class="cell" data-execution_count="5">
+<div id="5325704e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <iframe width="900" height="650" src="./output/missing_heatmap.html" title="Missing Values Heatmap"></iframe>
-<div id="14832632" class="cell" data-execution_count="6">
+<div id="ccc85399" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> countDistinct</span>
@@ -554,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="26984b06" class="cell" data-execution_count="7">
+<div id="d8215df1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> selected_df.toPandas()</span>
