@@ -188,6 +188,8 @@ selected_df = jobs_df.select(
 ```
 
 ```{python}
+#| echo: true
+#| eval: false
 import pandas as pd
 from pyspark.sql.functions import col, sum as spark_sum, when, trim, length
 import hvplot.pandas
@@ -204,7 +206,7 @@ missing_long = (
 
 missing_long["is_missing"] = missing_long["is_missing"].astype(int)
 
-missing_long.hvplot.heatmap(
+missing = missing_long.hvplot.heatmap(
   x="column",
   y="index",
   C = "is_missing",
@@ -214,9 +216,19 @@ missing_long.hvplot.heatmap(
   title = "Heatmap of Missing Values (5%)"
 ).opts(xrotation=45)
 
+hvplot.save(missing, './output/missing_heatmap.html')
+
 ```
 
+```{=html}
+<iframe width="900" height="650" src="./output/missing_heatmap.html" title="Missing Values Heatmap"></iframe>
+```
+
+
+
 ```{python}
+#| echo: true
+#| eval: false
 
 from pyspark.sql.functions import countDistinct
 
@@ -347,6 +359,9 @@ selected_df = selected_df.withColumn(
 
 
 ```{python}
+#| echo: true
+#| eval: false
+
 pdf = selected_df.toPandas()
 
 pdf.to_csv("./data/lightcast_cleaned.csv", index=False)
