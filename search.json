@@ -4,14 +4,14 @@
     "href": "eda.html",
     "title": "Exploratory Data Analysis",
     "section": "",
-    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation."
+    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. In red states, Professional, Scientific, and Technical Services has a slightly higher average salary."
   },
   {
     "objectID": "eda.html#exploring-the-salary-by-state-political-affiliation",
     "href": "eda.html#exploring-the-salary-by-state-political-affiliation",
     "title": "Exploratory Data Analysis",
     "section": "",
-    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation."
+    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. In red states, Professional, Scientific, and Technical Services has a slightly higher average salary."
   },
   {
     "objectID": "eda.html#exploring-the-minimum-education-level-by-political-affiliation",
@@ -25,7 +25,7 @@
     "href": "eda.html#ai-jobs-analysis",
     "title": "Exploratory Data Analysis",
     "section": "AI Jobs Analysis",
-    "text": "AI Jobs Analysis\n\nThis figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.\n\nSimilarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states."
+    "text": "AI Jobs Analysis\n\nThis figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.\n\nSimilarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states.\n\nThis graph clearly shows that of the top 5 states with the most number of AI job postings, 4/5 of them are blue states.\n\nThis graph is showing us the number of job postings by NAICS. For AI jobs, the NAICS with the largest number of AI job postings. Computer Systems Design is predominate NAICS with consulting services coming in second."
   },
   {
     "objectID": "about.html",
@@ -124,6 +124,27 @@
     "title": "Gender Disparities in Hiring & Political Influence",
     "section": "",
     "text": "[Research findings will be presented here]"
+  },
+  {
+    "objectID": "ml_methods.html#data-preprocessing",
+    "href": "ml_methods.html#data-preprocessing",
+    "title": "ML Methods",
+    "section": "Data Preprocessing",
+    "text": "Data Preprocessing"
+  },
+  {
+    "objectID": "ml_methods.html#k-means-clustering-unsupervised",
+    "href": "ml_methods.html#k-means-clustering-unsupervised",
+    "title": "ML Methods",
+    "section": "K-Means Clustering (unsupervised)",
+    "text": "K-Means Clustering (unsupervised)\n\nSetup and Feature Engineering\n\n\nDetermine Optimal K\n\n\nCluster Analysis\nKey Findings: - Cluster 0: Entry-level positions ($50-100k) - Cluster 4: Senior roles ($200k+) - Geographic clustering evident by state encoding"
+  },
+  {
+    "objectID": "ml_methods.html#multiple-regression-analysis",
+    "href": "ml_methods.html#multiple-regression-analysis",
+    "title": "ML Methods",
+    "section": "Multiple Regression Analysis",
+    "text": "Multiple Regression Analysis\nFeature Selection Justification: The features were selected based on their theoretical and empirical relationship with salary:\nSTATE & Political Leaning: Geographic location and political climate influence cost of living and compensation policies TITLE: Job title is the primary indicator of role level and responsibility LIGHTCAST_SECTORS: Industry sector determines baseline compensation structure SOC/NAICS: Occupation classification provides standardized job categorization Years of Experience: Direct correlation with salary progression (if available)"
   },
   {
     "objectID": "skill_gap_analysis.html",
