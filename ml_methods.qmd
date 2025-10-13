@@ -47,7 +47,7 @@ print(f"\nFirst few rows:")
 df.head()
 ```
 
-``` {python}
+```{python}
 
 #| label: data-inspection
 
@@ -80,7 +80,7 @@ if 'SALARY' in df.columns:
 
 
 ## Data Preprocessing
-``` {python}
+```{python}
 #| label: preprocessing
 
 # Create working copy
@@ -96,7 +96,6 @@ print(f"Removed {removed_rows:,} rows with missing salary or state data")
 print(f"Final dataset: {len(df_clean):,} rows")
 ```
 
-```{python}
 ```{python}
 #| label: political-leaning-creation
 #| code-fold: true
@@ -171,7 +170,6 @@ if df_clean['political_leaning'].value_counts().get('Other', 0) > 0:
     print(f"\n⚠️ States classified as 'Other':")
     other_states = df_clean[df_clean['political_leaning'] == 'Other']['STATE'].value_counts()
     print(other_states.head(10))
-```
 ```
 ``` {python}
 #| label: visualize-political-distribution
