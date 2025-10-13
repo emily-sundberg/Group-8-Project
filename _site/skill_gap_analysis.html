@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>skill_gap_analysis – Job Market Analysis 2024</title>
+<title>Skills Gap Analysis – Job Market Analysis 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-93b10530f83a0ed64c0288fd832e80ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0a0ffc605f251ee231cd5aebd5e75a38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,11 +67,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -97,23 +100,23 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data_cleaning.qmd/ipynb"> 
+    <a class="nav-link" href="./data_cleaning.html"> 
 <span class="menu-text">Data Cleaning &amp; Exploration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./eda.qmd/ipynb"> 
+    <a class="nav-link" href="./eda.html"> 
 <span class="menu-text">Exploratory Data Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./skill_gap_analysis.qmd/ipynb"> 
+    <a class="nav-link active" href="./skill_gap_analysis.html" aria-current="page"> 
 <span class="menu-text">Skill Gap Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./ml_methods.qmd/ipynb"> 
+    <a class="nav-link" href="./ml_methods.html"> 
 <span class="menu-text">ML Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./nlp_methods.qmd/ipynb"> 
+    <a class="nav-link" href="./nlp_methods.html"> 
 <span class="menu-text">NLP Methods</span></a>
   </li>  
 </ul>
@@ -127,15 +130,162 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Skills Gap Analysis</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="23c228b2" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/10/11 16:17:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/10/11 16:17:32 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+[Stage 1:&gt;                                                          (0 + 1) / 1]                                                                                25/10/11 16:17:42 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.</code></pre>
+</div>
+</div>
+<div id="69849f53" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Python</th>
+<th data-quarto-table-cell-role="th">Java</th>
+<th data-quarto-table-cell-role="th">SQL</th>
+<th data-quarto-table-cell-role="th">Power BI</th>
+<th data-quarto-table-cell-role="th">Machine Learning</th>
+<th data-quarto-table-cell-role="th">Cloud Computing</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Emily</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Pranathi</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="5bde0c1a" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="skill_gap_analysis_files/figure-html/cell-4-output-1.png" width="619" height="609" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="1f4ee0ab" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-stderr">
+<pre><code>[Stage 2:&gt;                                                          (0 + 1) / 1]                                                                                </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Python</th>
+<th data-quarto-table-cell-role="th">Java</th>
+<th data-quarto-table-cell-role="th">SQL</th>
+<th data-quarto-table-cell-role="th">Power BI</th>
+<th data-quarto-table-cell-role="th">Machine Learning</th>
+<th data-quarto-table-cell-role="th">Cloud Computing</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Emily</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Pranathi</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Job Postings Count</td>
+<td>12350</td>
+<td>4470</td>
+<td>0</td>
+<td>10850</td>
+<td>4324</td>
+<td>2555</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Based on our Skills Gap Analysis, we need to work on our Python skills. In order to be more competitive in the job market, we will finish the Python DataCamp and practice incorporating our new skills into our current roles.</p>
 
 
 
