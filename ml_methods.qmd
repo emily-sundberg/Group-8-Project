@@ -3,12 +3,13 @@ title: "ML Methods"
 format:
   html:
     code-fold: true
+    code-overflow: wrap
     code-summary: "Show code"
     code-tools: true
 
 execute:
-  echo: false
-  eval: true
+  echo: true
+  eval: false
   output: true
   freeze: auto
 ---
@@ -20,7 +21,6 @@ execute:
 
 import pandas as pd
 import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
@@ -158,7 +158,6 @@ print(df_clean['political_leaning'].value_counts())
 print("\nPercentage:")
 print((df_clean['political_leaning'].value_counts() / len(df_clean) * 100).round(2))
 ```
-
 ``` {python}
 #| label: visualize-political-distribution
 #| code-fold: true
