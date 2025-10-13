@@ -4,6 +4,7 @@ format:
   html:
     code-overflow: wrap
     code-fold: true
+    toc = false
 execute:
   echo: true
   eval: false
