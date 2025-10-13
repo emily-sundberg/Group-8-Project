@@ -4,7 +4,6 @@ format:
   html:
     code-overflow: wrap
     code-fold: true
-    theme: cerulean
     toc: false
 
 execute:
