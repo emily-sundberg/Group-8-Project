@@ -2,12 +2,14 @@
 title: "Exploratory Data Analysis"
 format:
   html:
+    code-overflow: wrap
+    code-fold: true
     theme: cerulean
     toc: false
 
 execute:
   echo: false
-  eval: true
+  eval: false
   output: true
   freeze: auto
 ---
@@ -36,7 +38,7 @@ eda.show(15)
 
 ```
 
-# Exploring the Salary by State Political Affiliation
+## Exploring the Salary by State Political Affiliation
 
 ```{python}
 from pyspark.sql import functions as F
@@ -87,11 +89,17 @@ fig.update_layout(
 
 fig.show()
 
+fig.write_html("./output/salary_affiliation.html")
+
+```
+
+```{=html}
+<iframe width="900" height="650" src="./output/salary_affiliation.html" title="Salary By State Political Affiliation"></iframe>
 ```
 
 This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation. 
 
-# Exploring the minimum education level by political affiliation
+## Exploring the minimum education level by political affiliation
 
 
 ```{python}
@@ -130,7 +138,16 @@ fig.update_layout(
 
 fig.show()
 
+fig.write_html("./output/education_affiliation.html")
+
+
 ```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/education_affiliation.html" title="Min Education Levels by State Political Affiliation"></iframe>
+```
+
 
 This graph shows us the comparison of job postings by political affiliation and minimum education level. As you can see, red states have far more job postings for lower education levels such as High School, Associate Degree, or Bachelor's degree, and blue states have more postings requiring a Master's Degree or higher. 
 
@@ -153,11 +170,21 @@ fig.update_layout(
 )
 
 fig.show()
+
+fig.write_html("./output/salary_education_affiliation.html")
+
+
 ```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/salary_education_affiliation.html" title="Average Salary by Min Education Levels and State Political Affiliation"></iframe>
+```
+
 
 This figure tells us that despite red states having more job postings with education level requirements below a Master's degree, the salaries in Blue states are higher for every single minimum education level. This could be attributed to a higher cost of living in most blue states. 
 
-# AI Jobs Analysis
+## AI Jobs Analysis
 
 ```{python}
 from pyspark.sql import functions as F
@@ -219,7 +246,15 @@ fig.update_layout(
 
 fig.show()
 
+fig.write_html("./output/AI_education_affiliation.html")
+
 ```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/AI_education_affiliation.html" title="AI Jobs by Min Education Levels and State Political Affiliation"></iframe>
+```
+
 
 This figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of  AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.
 
@@ -242,6 +277,13 @@ fig.update_layout(
 )
 
 fig.show()
+
+fig.write_html("./output/AI_salary_education_affiliation.html")
+
+```
+
+```{=html}
+<iframe width="900" height="650" src="./output/AI_salary_education_affiliation.html" title="AI Job Salaries by Min Education Levels and State Political Affiliation"></iframe>
 ```
 
 Similarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states. 
@@ -283,6 +325,13 @@ fig.update_layout(
 )
 
 fig.show()
+
+fig.write_html("./output/AI_byState.html")
+```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/AI_byState.html" title="Number of AI Job Postings by State"></iframe>
 ```
 
 
@@ -341,4 +390,11 @@ fig.update_layout(
 )
 
 fig.show()
+
+fig.write_html("./output/AI_industries.html")
+
+```
+
+```{=html}
+<iframe width="900" height="650" src="./output/AI_industries.html" title="Number of AI Job Postings by Industry"></iframe>
 ```
