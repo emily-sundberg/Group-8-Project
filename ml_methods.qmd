@@ -5,10 +5,10 @@ format:
     code-fold: true
     code-summary: "Show code"
     code-tools: true
-    
+
 execute:
   echo: false
-  eval: false
+  eval: true
   output: true
   freeze: auto
 ---
@@ -104,7 +104,7 @@ print(f"Final dataset: {len(df_clean):,} rows")
 
 ```{python}
 ## Political Leaning Classification (Fixed)
-```{python}
+
 #| label: fix-fips-and-political-leaning
 #| code-fold: true
 
