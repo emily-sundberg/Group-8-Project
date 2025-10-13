@@ -28,55 +28,6 @@
     "text": "AI Jobs Analysis\n\nThis figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.\n\nSimilarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states."
   },
   {
-    "objectID": "skill_gap_analysis.html",
-    "href": "skill_gap_analysis.html",
-    "title": "Skills Gap Analysis",
-    "section": "",
-    "text": "Setting default log level to \"WARN\".\nTo adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).\n25/10/11 16:17:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n25/10/11 16:17:32 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.\n[Stage 1:&gt;                                                          (0 + 1) / 1]                                                                                25/10/11 16:17:42 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.\n\n\n\n\n\n\n\n\n\n\n\nPython\nJava\nSQL\nPower BI\nMachine Learning\nCloud Computing\n\n\nName\n\n\n\n\n\n\n\n\n\n\nEmily\n2\n2\n2\n4\n1\n2\n\n\nPranathi\n1\n1\n1\n4\n1\n2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n[Stage 2:&gt;                                                          (0 + 1) / 1]                                                                                \n\n\n\n\n\n\n\n\n\nPython\nJava\nSQL\nPower BI\nMachine Learning\nCloud Computing\n\n\nName\n\n\n\n\n\n\n\n\n\n\nEmily\n2\n2\n2\n4\n1\n2\n\n\nPranathi\n1\n1\n1\n4\n1\n2\n\n\nJob Postings Count\n12350\n4470\n0\n10850\n4324\n2555\n\n\n\n\n\n\n\nBased on our Skills Gap Analysis, we need to work on our Python skills. In order to be more competitive in the job market, we will finish the Python DataCamp and practice incorporating our new skills into our current roles."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Gender Disparities in Hiring & Political Influence",
-    "section": "",
-    "text": "This research investigates the intersection of gender-based employment patterns and political geography in the United States.\n\n\n\n\nWe analyze gender representation and hiring trends across multiple sectors:\n\nTechnology Sector: Software development, AI/ML, data science\nHealthcare: Medical professionals, administrative roles\nFinance: Banking, investment, fintech\nManufacturing: Production, engineering, management\nService Industries: Retail, hospitality, education\n\nKey metrics examined: - Hiring rates by gender - Retention rates - Promotion patterns - Industry-specific barriers\n\n\n\nExamining state-level political affiliations and their relationship with:\n\nRed States (Conservative-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nBlue States (Liberal-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nSwing States: Comparative analysis of mixed political environments\n\n\n\n\nFocused investigation on the technology sector, specifically:\n\nAI and Machine Learning roles\n\nData scientists\nML engineers\nAI researchers\n\nWomen’s representation comparison:\n\nConservative states (red states)\nLiberal states (blue states)\nNational averages\n\nFactors analyzed:\n\nEducational pipeline differences\nCompany culture and policies\nState-level STEM initiatives\nIndustry concentration by state\n\n\n\n\n\nComprehensive wage analysis examining:\n\nGender wage gaps across:\n\nRed states\nBlue states\nSwing states\n\nIndustry-specific wage disparities:\n\nTech and AI fields\nHealthcare\nFinance\nManufacturing\n\nControlling for:\n\nExperience level\nEducation\nJob title/role\nCompany size\nCost of living adjustments\n\nPolitical affiliation impact:\n\nState minimum wage policies\nEqual pay legislation\nWorkplace protection laws\n\n\n\n\n\n\nWe expect this analysis will reveal that political geography influences gender-based employment outcomes, particularly in emerging high-wage sectors such as AI and technology.\n\n\n\n[Your data sources and analytical methods will go here]\n\n\n\n[Interactive charts and graphs will be added here]\n\n\n\n[Research findings will be presented here]"
-  },
-  {
-    "objectID": "index.html#research-questions",
-    "href": "index.html#research-questions",
-    "title": "Gender Disparities in Hiring & Political Influence",
-    "section": "",
-    "text": "We analyze gender representation and hiring trends across multiple sectors:\n\nTechnology Sector: Software development, AI/ML, data science\nHealthcare: Medical professionals, administrative roles\nFinance: Banking, investment, fintech\nManufacturing: Production, engineering, management\nService Industries: Retail, hospitality, education\n\nKey metrics examined: - Hiring rates by gender - Retention rates - Promotion patterns - Industry-specific barriers\n\n\n\nExamining state-level political affiliations and their relationship with:\n\nRed States (Conservative-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nBlue States (Liberal-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nSwing States: Comparative analysis of mixed political environments\n\n\n\n\nFocused investigation on the technology sector, specifically:\n\nAI and Machine Learning roles\n\nData scientists\nML engineers\nAI researchers\n\nWomen’s representation comparison:\n\nConservative states (red states)\nLiberal states (blue states)\nNational averages\n\nFactors analyzed:\n\nEducational pipeline differences\nCompany culture and policies\nState-level STEM initiatives\nIndustry concentration by state\n\n\n\n\n\nComprehensive wage analysis examining:\n\nGender wage gaps across:\n\nRed states\nBlue states\nSwing states\n\nIndustry-specific wage disparities:\n\nTech and AI fields\nHealthcare\nFinance\nManufacturing\n\nControlling for:\n\nExperience level\nEducation\nJob title/role\nCompany size\nCost of living adjustments\n\nPolitical affiliation impact:\n\nState minimum wage policies\nEqual pay legislation\nWorkplace protection laws"
-  },
-  {
-    "objectID": "index.html#expected-findings",
-    "href": "index.html#expected-findings",
-    "title": "Gender Disparities in Hiring & Political Influence",
-    "section": "",
-    "text": "We expect this analysis will reveal that political geography influences gender-based employment outcomes, particularly in emerging high-wage sectors such as AI and technology."
-  },
-  {
-    "objectID": "index.html#methodology",
-    "href": "index.html#methodology",
-    "title": "Gender Disparities in Hiring & Political Influence",
-    "section": "",
-    "text": "[Your data sources and analytical methods will go here]"
-  },
-  {
-    "objectID": "index.html#data-visualizations",
-    "href": "index.html#data-visualizations",
-    "title": "Gender Disparities in Hiring & Political Influence",
-    "section": "",
-    "text": "[Interactive charts and graphs will be added here]"
-  },
-  {
-    "objectID": "index.html#conclusions",
-    "href": "index.html#conclusions",
-    "title": "Gender Disparities in Hiring & Political Influence",
-    "section": "",
-    "text": "[Research findings will be presented here]"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About This Project",
@@ -131,6 +82,55 @@
     "title": "About This Project",
     "section": "Timeline",
     "text": "Timeline\n\nData collection and cleaning\nExploratory data analysis\nStatistical modeling\nVisualization development\nFinal report and presentation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "This research investigates the intersection of gender-based employment patterns and political geography in the United States.\n\n\n\n\nWe analyze gender representation and hiring trends across multiple sectors:\n\nTechnology Sector: Software development, AI/ML, data science\nHealthcare: Medical professionals, administrative roles\nFinance: Banking, investment, fintech\nManufacturing: Production, engineering, management\nService Industries: Retail, hospitality, education\n\nKey metrics examined: - Hiring rates by gender - Retention rates - Promotion patterns - Industry-specific barriers\n\n\n\nExamining state-level political affiliations and their relationship with:\n\nRed States (Conservative-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nBlue States (Liberal-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nSwing States: Comparative analysis of mixed political environments\n\n\n\n\nFocused investigation on the technology sector, specifically:\n\nAI and Machine Learning roles\n\nData scientists\nML engineers\nAI researchers\n\nWomen’s representation comparison:\n\nConservative states (red states)\nLiberal states (blue states)\nNational averages\n\nFactors analyzed:\n\nEducational pipeline differences\nCompany culture and policies\nState-level STEM initiatives\nIndustry concentration by state\n\n\n\n\n\nComprehensive wage analysis examining:\n\nGender wage gaps across:\n\nRed states\nBlue states\nSwing states\n\nIndustry-specific wage disparities:\n\nTech and AI fields\nHealthcare\nFinance\nManufacturing\n\nControlling for:\n\nExperience level\nEducation\nJob title/role\nCompany size\nCost of living adjustments\n\nPolitical affiliation impact:\n\nState minimum wage policies\nEqual pay legislation\nWorkplace protection laws\n\n\n\n\n\n\nWe expect this analysis will reveal that political geography influences gender-based employment outcomes, particularly in emerging high-wage sectors such as AI and technology.\n\n\n\n[Your data sources and analytical methods will go here]\n\n\n\n[Interactive charts and graphs will be added here]\n\n\n\n[Research findings will be presented here]"
+  },
+  {
+    "objectID": "index.html#research-questions",
+    "href": "index.html#research-questions",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "We analyze gender representation and hiring trends across multiple sectors:\n\nTechnology Sector: Software development, AI/ML, data science\nHealthcare: Medical professionals, administrative roles\nFinance: Banking, investment, fintech\nManufacturing: Production, engineering, management\nService Industries: Retail, hospitality, education\n\nKey metrics examined: - Hiring rates by gender - Retention rates - Promotion patterns - Industry-specific barriers\n\n\n\nExamining state-level political affiliations and their relationship with:\n\nRed States (Conservative-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nBlue States (Liberal-leaning)\n\nGender hiring ratios\nWorkplace policies\nWage structures\n\nSwing States: Comparative analysis of mixed political environments\n\n\n\n\nFocused investigation on the technology sector, specifically:\n\nAI and Machine Learning roles\n\nData scientists\nML engineers\nAI researchers\n\nWomen’s representation comparison:\n\nConservative states (red states)\nLiberal states (blue states)\nNational averages\n\nFactors analyzed:\n\nEducational pipeline differences\nCompany culture and policies\nState-level STEM initiatives\nIndustry concentration by state\n\n\n\n\n\nComprehensive wage analysis examining:\n\nGender wage gaps across:\n\nRed states\nBlue states\nSwing states\n\nIndustry-specific wage disparities:\n\nTech and AI fields\nHealthcare\nFinance\nManufacturing\n\nControlling for:\n\nExperience level\nEducation\nJob title/role\nCompany size\nCost of living adjustments\n\nPolitical affiliation impact:\n\nState minimum wage policies\nEqual pay legislation\nWorkplace protection laws"
+  },
+  {
+    "objectID": "index.html#expected-findings",
+    "href": "index.html#expected-findings",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "We expect this analysis will reveal that political geography influences gender-based employment outcomes, particularly in emerging high-wage sectors such as AI and technology."
+  },
+  {
+    "objectID": "index.html#methodology",
+    "href": "index.html#methodology",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "[Your data sources and analytical methods will go here]"
+  },
+  {
+    "objectID": "index.html#data-visualizations",
+    "href": "index.html#data-visualizations",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "[Interactive charts and graphs will be added here]"
+  },
+  {
+    "objectID": "index.html#conclusions",
+    "href": "index.html#conclusions",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "[Research findings will be presented here]"
+  },
+  {
+    "objectID": "skill_gap_analysis.html",
+    "href": "skill_gap_analysis.html",
+    "title": "Skills Gap Analysis",
+    "section": "",
+    "text": "Setting default log level to \"WARN\".\nTo adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).\n25/10/11 16:17:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n25/10/11 16:17:32 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.\n[Stage 1:&gt;                                                          (0 + 1) / 1]                                                                                25/10/11 16:17:42 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.\n\n\n\n\n\n\n\n\n\n\n\nPython\nJava\nSQL\nPower BI\nMachine Learning\nCloud Computing\n\n\nName\n\n\n\n\n\n\n\n\n\n\nEmily\n2\n2\n2\n4\n1\n2\n\n\nPranathi\n1\n1\n1\n4\n1\n2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n[Stage 2:&gt;                                                          (0 + 1) / 1]                                                                                \n\n\n\n\n\n\n\n\n\nPython\nJava\nSQL\nPower BI\nMachine Learning\nCloud Computing\n\n\nName\n\n\n\n\n\n\n\n\n\n\nEmily\n2\n2\n2\n4\n1\n2\n\n\nPranathi\n1\n1\n1\n4\n1\n2\n\n\nJob Postings Count\n12350\n4470\n0\n10850\n4324\n2555\n\n\n\n\n\n\n\nBased on our Skills Gap Analysis, we need to work on our Python skills. In order to be more competitive in the job market, we will finish the Python DataCamp and practice incorporating our new skills into our current roles."
   },
   {
     "objectID": "data_cleaning.html",
