@@ -97,53 +97,43 @@ print(f"Final dataset: {len(df_clean):,} rows")
 ```
 
 ```{python}
-#| label: political-leaning-creation
+## Political Leaning Classification (Fixed)
+```{python}
+#| label: fix-fips-and-political-leaning
 #| code-fold: true
 
-# State name to abbreviation mapping
-state_to_abbrev = {
-    'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
-    'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
-    'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
-    'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS',
-    'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
-    'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
-    'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
-    'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
-    'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
-    'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
-    'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT',
-    'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV',
-    'Wisconsin': 'WI', 'Wyoming': 'WY', 'District of Columbia': 'DC'
+# FIPS code to state abbreviation mapping
+fips_to_state = {
+    1: 'AL', 2: 'AK', 4: 'AZ', 5: 'AR', 6: 'CA', 8: 'CO', 9: 'CT', 10: 'DE',
+    11: 'DC', 12: 'FL', 13: 'GA', 15: 'HI', 16: 'ID', 17: 'IL', 18: 'IN',
+    19: 'IA', 20: 'KS', 21: 'KY', 22: 'LA', 23: 'ME', 24: 'MD', 25: 'MA',
+    26: 'MI', 27: 'MN', 28: 'MS', 29: 'MO', 30: 'MT', 31: 'NE', 32: 'NV',
+    33: 'NH', 34: 'NJ', 35: 'NM', 36: 'NY', 37: 'NC', 38: 'ND', 39: 'OH',
+    40: 'OK', 41: 'OR', 42: 'PA', 44: 'RI', 45: 'SC', 46: 'SD', 47: 'TN',
+    48: 'TX', 49: 'UT', 50: 'VT', 51: 'VA', 53: 'WA', 54: 'WV', 55: 'WI',
+    56: 'WY', 72: 'PR'
 }
 
-# Political classifications based on 2024 presidential election
-red_states = [
-    'AL', 'AK', 'AR', 'FL', 'ID', 'IN', 'IA', 'KS', 'KY', 
-    'LA', 'MS', 'MO', 'MT', 'NE', 'ND', 'OH', 'OK', 'SC', 
-    'SD', 'TN', 'TX', 'UT', 'WV', 'WY'
-]
+# Convert FIPS codes to state abbreviations
+df_clean['STATE_ABBREV'] = df_clean['STATE'].apply(
+    lambda x: fips_to_state.get(int(x), 'Unknown') if pd.notna(x) else 'Unknown'
+)
 
-blue_states = [
-    'CA', 'CO', 'CT', 'DE', 'HI', 'IL', 'ME', 'MD', 'MA', 
-    'MI', 'MN', 'NH', 'NJ', 'NM', 'NY', 'OR', 'PA', 'RI', 
-    'VT', 'VA', 'WA', 'WI', 'DC'
-]
+# Political classifications
+red_states = ['AL', 'AK', 'AR', 'FL', 'ID', 'IN', 'IA', 'KS', 'KY', 
+              'LA', 'MS', 'MO', 'MT', 'NE', 'ND', 'OH', 'OK', 'SC', 
+              'SD', 'TN', 'TX', 'UT', 'WV', 'WY']
+
+blue_states = ['CA', 'CO', 'CT', 'DE', 'HI', 'IL', 'ME', 'MD', 'MA', 
+               'MI', 'MN', 'NH', 'NJ', 'NM', 'NY', 'OR', 'PA', 'RI', 
+               'VT', 'VA', 'WA', 'WI', 'DC']
 
 swing_states = ['AZ', 'GA', 'NC', 'NV']
 
-def assign_political_leaning(state):
-    """Classify state by political leaning"""
-    if pd.isna(state):
+def assign_political_leaning(state_abbrev):
+    if pd.isna(state_abbrev) or state_abbrev == 'Unknown':
         return 'Unknown'
-    
-    # Convert to string and clean
-    state_str = str(state).strip()
-    
-    # Try to get abbreviation if full name provided
-    state_abbrev = state_to_abbrev.get(state_str, state_str.upper())
-    
-    # Classify
+    state_abbrev = str(state_abbrev).upper()
     if state_abbrev in red_states:
         return 'Red'
     elif state_abbrev in blue_states:
@@ -153,28 +143,21 @@ def assign_political_leaning(state):
     else:
         return 'Other'
 
-# Apply classification
-df_clean['political_leaning'] = df_clean['STATE'].apply(assign_political_leaning)
+df_clean['political_leaning'] = df_clean['STATE_ABBREV'].apply(assign_political_leaning)
 
-# Display results
 print("="*60)
-print("POLITICAL LEANING DISTRIBUTION")
+print("POLITICAL LEANING DISTRIBUTION (FIXED)")
 print("="*60)
-print("\nDistribution:")
 print(df_clean['political_leaning'].value_counts())
-print(f"\nPercentage:")
+print("\nPercentage:")
 print((df_clean['political_leaning'].value_counts() / len(df_clean) * 100).round(2))
-
-# Debug: Check for "Other" classifications
-if df_clean['political_leaning'].value_counts().get('Other', 0) > 0:
-    print(f"\n⚠️ States classified as 'Other':")
-    other_states = df_clean[df_clean['political_leaning'] == 'Other']['STATE'].value_counts()
-    print(other_states.head(10))
 ```
+
 ``` {python}
 #| label: visualize-political-distribution
+#| code-fold: true
 
-# Visualize political distribution
+# Visualize political leaning distribution
 fig = px.pie(
     values=df_clean['political_leaning'].value_counts().values,
     names=df_clean['political_leaning'].value_counts().index,
@@ -192,8 +175,9 @@ fig.show()
 
 ```{python}
 #| label: clustering-reference-label
+#| code-fold: true
 
-# Determine which reference label to use
+# Determine which reference label to use (SOC, NAICS, or ONET)
 reference_label = None
 for label in ['SOC_2', 'NAICS_2022_2', 'ONET', 'LIGHTCAST_SECTORS']:
     if label in df_clean.columns and df_clean[label].notna().sum() > 0:
@@ -202,26 +186,31 @@ for label in ['SOC_2', 'NAICS_2022_2', 'ONET', 'LIGHTCAST_SECTORS']:
         break
 
 if reference_label is None:
-    print("Using TITLE as reference.")
+    print("No classification column found. Using TITLE as reference.")
     reference_label = 'TITLE'
 
 print(f"\nReference Label: {reference_label}")
 print(f"Unique values: {df_clean[reference_label].nunique():,}")
 print(f"\nTop 10 {reference_label} categories:")
 print(df_clean[reference_label].value_counts().head(10))
-
 ```
 ``` {python}
 #| label: clustering-feature-engineering
+#| code-fold: true
+#| code-summary: "View feature engineering code"
 
 # Prepare features for clustering
 df_cluster = df_clean.copy()
+
+print("="*80)
+print("FEATURE ENGINEERING FOR CLUSTERING")
+print("="*80)
 
 # Encode categorical variables
 encoders = {}
 categorical_cols = ['STATE', 'TITLE', 'political_leaning', 'LIGHTCAST_SECTORS']
 
-print("\nEncoding categorical variables for clustering:")
+print(f"\nEncoding categorical variables:")
 for col in categorical_cols:
     if col in df_cluster.columns:
         le = LabelEncoder()
@@ -229,7 +218,7 @@ for col in categorical_cols:
             df_cluster[col].fillna('Unknown').astype(str)
         )
         encoders[col] = le
-        print(f"  ✓ Encoded: {col}")
+        print(f"  ✓ {col}: {df_cluster[col].nunique()} unique values")
 
 # Select clustering features
 clustering_features = ['SALARY']
@@ -245,8 +234,10 @@ if 'MIN_YEARS_EXPERIENCE' in df_cluster.columns:
         df_cluster['MIN_YEARS_EXPERIENCE'], errors='coerce'
     )
     clustering_features.append('MIN_YEARS_EXPERIENCE')
+    print(f"  ✓ MIN_YEARS_EXPERIENCE: numeric feature")
 
-print(f"\nFinal Clustering Features ({len(clustering_features)}):")
+print(f"\n📊 Total Clustering Features: {len(clustering_features)}")
+print("\nFeature List:")
 for i, feature in enumerate(clustering_features, 1):
     print(f"  {i}. {feature}")
 
@@ -259,11 +250,14 @@ print(f"\nFeature Matrix Shape: {X_cluster.shape}")
 
 ```{python}
 #| label: determine-optimal-clusters
+#| code-fold: true
+#| code-summary: "View elbow method code"
 
-# Determine optimal number of clusters using Elbow Method and Silhouette Score
+# Standardize features
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_cluster)
 
+# Test different numbers of clusters
 K_range = range(2, 11)
 inertias = []
 silhouette_scores = []
@@ -286,6 +280,7 @@ print(f"\n💡 Optimal k based on Silhouette Score: {optimal_k}")
 
 ```{python}
 #| label: plot-elbow-silhouette
+#| code-fold: true
 
 # Visualize elbow curve and silhouette scores
 fig = make_subplots(
@@ -317,15 +312,15 @@ fig.update_layout(
     title_text="Determining Optimal Number of Clusters"
 )
 fig.show()
-
 ```
 
 ### Cluster Analysis
 
 ``` {python}
 #| label: perform-kmeans
+#| code-fold: true
 
-# Perform KMeans clustering with k=5 (per assignment requirements)
+# Perform KMeans with k=5 (per assignment requirements)
 n_clusters = 5
 
 print(f"Performing KMeans with k={n_clusters} clusters...")
@@ -343,8 +338,9 @@ for cluster_id, count in cluster_counts.items():
 
 ``` {python}
 #| label: visualize-clusters
+#| code-fold: true
 
-# Visualize clusters (sample for performance)
+# Sample for performance (5000 points)
 sample_size = min(5000, len(df_cluster))
 df_sample = df_cluster.sample(sample_size, random_state=42)
 
@@ -358,7 +354,7 @@ fig = px.scatter(
     labels={'SALARY': 'Annual Salary ($)', 'STATE_encoded': 'State (Encoded)', 'cluster': 'Cluster'},
     color_continuous_scale='Viridis'
 )
-fig.update_layout(template="plotly_white", height=500)
+fig.update_layout(template="plotly_white", height=550, font=dict(family="Roboto", size=12))
 fig.show()
 ```
 **Key Findings:**
@@ -368,6 +364,7 @@ fig.show()
 
 ```{python}
 #| label: cluster-profiling
+#| code-fold: true
 
 # Analyze cluster characteristics
 print("="*80)
@@ -385,12 +382,14 @@ cluster_profiles.columns = [
     'Dominant_Political', 'Count'
 ]
 
-print(cluster_profiles.round(2))
+cluster_profiles = cluster_profiles.round(2)
+print(cluster_profiles)
 
 ```
 
 ```{python}
 #| label: visualize-cluster-profiles
+#| code-fold: true
 
 # Visualize cluster salary profiles
 profile_df = cluster_profiles.reset_index()
@@ -406,6 +405,348 @@ fig = px.bar(
     color_continuous_scale='Viridis'
 )
 fig.update_traces(texttemplate='n=%{text:,}', textposition='outside')
-fig.update_layout(template="plotly_white", height=450)
+fig.update_layout(template="plotly_white", height=450, font=dict(family="Roboto", size=12))
 fig.show()
+```
+
+```{python}
+#| label: cluster-reference-comparison
+#| code-fold: true
+
+# Compare clusters with reference labels
+print(f"\n{'='*80}")
+print(f"CLUSTER vs {reference_label.upper()} COMPARISON")
+print(f"{'='*80}")
+
+for cluster_id in sorted(df_cluster['cluster'].unique()):
+    cluster_data = df_cluster[df_cluster['cluster'] == cluster_id]
+    top_categories = cluster_data[reference_label].value_counts().head(5)
+    
+    print(f"\n📊 Cluster {cluster_id}:")
+    print(f"   Size: {len(cluster_data):,} jobs")
+    print(f"   Avg Salary: ${cluster_data['SALARY'].mean():,.2f}")
+    if 'political_leaning' in cluster_data.columns:
+        print(f"   Dominant Political: {cluster_data['political_leaning'].mode()[0] if len(cluster_data['political_leaning'].mode()) > 0 else 'Mixed'}")
+    print(f"   Top 5 {reference_label} categories:")
+    for category, count in top_categories.items():
+        pct = (count / len(cluster_data)) * 100
+        print(f"     • {category}: {count:,} ({pct:.1f}%)")
+```
+
+## Multiple Regression Analysis
+
+``` {python}
+#| label: regression-feature-engineering
+#| code-fold: true
+#| code-summary: "View feature engineering code"
+
+# Prepare features for salary prediction
+df_reg = df_clean.copy()
+
+print("="*80)
+print("FEATURE ENGINEERING FOR SALARY PREDICTION")
+print("="*80)
+
+# Encode categorical variables
+le_reg = {}
+categorical_features = ['STATE', 'TITLE', 'political_leaning', 'LIGHTCAST_SECTORS']
+
+# Add SOC or NAICS if available
+if 'SOC_2' in df_reg.columns:
+    categorical_features.append('SOC_2')
+elif 'NAICS_2022_2' in df_reg.columns:
+    categorical_features.append('NAICS_2022_2')
+
+print(f"\nCategorical features to encode ({len(categorical_features)}):")
+for col in categorical_features:
+    if col in df_reg.columns:
+        le = LabelEncoder()
+        df_reg[f'{col}_encoded'] = le.fit_transform(
+            df_reg[col].fillna('Unknown').astype(str)
+        )
+        le_reg[col] = le
+        print(f"  ✓ {col}: {df_reg[col].nunique()} unique values")
+
+# Select features for regression
+feature_cols = []
+for col in categorical_features:
+    encoded_col = f'{col}_encoded'
+    if encoded_col in df_reg.columns:
+        feature_cols.append(encoded_col)
+
+# Add numerical features if available
+numeric_features = ['MIN_YEARS_EXPERIENCE', 'MAX_YEARS_EXPERIENCE']
+for num_feat in numeric_features:
+    if num_feat in df_reg.columns:
+        df_reg[num_feat] = pd.to_numeric(df_reg[num_feat], errors='coerce')
+        if df_reg[num_feat].notna().sum() > 0:
+            feature_cols.append(num_feat)
+            print(f"  ✓ {num_feat}: numeric feature added")
+
+print(f"\n Total Features for Salary Prediction: {len(feature_cols)}")
+
+# Prepare X and y
+X = df_reg[feature_cols].fillna(df_reg[feature_cols].mean())
+y = df_reg['SALARY']
+
+print(f"\n Dataset Statistics:")
+print(f"  • Feature Matrix Shape: {X.shape}")
+print(f"  • Salary Statistics:")
+print(f"    - Mean: ${y.mean():,.2f}")
+print(f"    - Median: ${y.median():,.2f}")
+print(f"    - Std Dev: ${y.std():,.2f}")
+print(f"    - Range: ${y.min():,.2f} - ${y.max():,.2f}")
+```
+Feature Selection Justification:
+The features were selected based on their theoretical and empirical relationship with salary:
+
+STATE & Political Leaning: Geographic location and political climate influence cost of living and compensation policies
+TITLE: Job title is the primary indicator of role level and responsibility
+LIGHTCAST_SECTORS: Industry sector determines baseline compensation structure
+SOC/NAICS: Occupation classification provides standardized job categorization
+Years of Experience: Direct correlation with salary progression (if available)
+
+``` {python}
+#| label: train-test-split-regression
+#| code-fold: true
+
+# Split data (70/30 as per assignment requirements)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.30, random_state=42
+)
+
+print("="*80)
+print("TRAIN/TEST SPLIT")
+print("="*80)
+print(f"\nTraining Set: {X_train.shape[0]:,} samples ({X_train.shape[0]/len(X)*100:.1f}%)")
+print(f"Test Set: {X_test.shape[0]:,} samples ({X_test.shape[0]/len(X)*100:.1f}%)")
+print(f"\nSalary Distribution:")
+print(f"  Training - Mean: ${y_train.mean():,.2f}, Std: ${y_train.std():,.2f}")
+print(f"  Test - Mean: ${y_test.mean():,.2f}, Std: ${y_test.std():,.2f}")
+
+```
+
+```{python}
+#| label: multiple-linear-regression
+#| code-fold: true
+#| code-summary: "View Linear Regression code"
+
+print("="*80)
+print("MODEL 1: MULTIPLE LINEAR REGRESSION")
+print("="*80)
+
+# Train model
+lin_reg = LinearRegression()
+lin_reg.fit(X_train, y_train)
+
+# Make predictions
+y_pred_lin = lin_reg.predict(X_test)
+
+# Calculate evaluation metrics
+rmse_lin = np.sqrt(mean_squared_error(y_test, y_pred_lin))
+r2_lin = r2_score(y_test, y_pred_lin)
+mae_lin = np.mean(np.abs(y_test - y_pred_lin))
+
+print(f"\n📊 Model Performance:")
+print(f"   • R² Score: {r2_lin:.4f}")
+print(f"     → Explains {r2_lin*100:.2f}% of salary variance")
+print(f"   • RMSE: ${rmse_lin:,.2f}")
+print(f"   • MAE: ${mae_lin:,.2f}")
+
+# Feature coefficients
+coef_df = pd.DataFrame({
+    'Feature': feature_cols,
+    'Coefficient': lin_reg.coef_
+}).sort_values('Coefficient', key=abs, ascending=False)
+
+print(f"\n📈 Top 10 Most Influential Features:")
+print(coef_df.head(10).to_string(index=False))
+```
+
+```{python}
+#| label: visualize-linear-coefficients
+#| code-fold: true
+
+# Visualize top 15 feature coefficients
+top_features = coef_df.head(15)
+
+fig = px.bar(
+    top_features,
+    x='Coefficient',
+    y='Feature',
+    orientation='h',
+    title='Top 15 Feature Coefficients - Multiple Linear Regression',
+    labels={'Coefficient': 'Impact on Salary ($)', 'Feature': 'Feature'},
+    color='Coefficient',
+    color_continuous_scale='RdBu',
+    color_continuous_midpoint=0
+)
+
+fig.update_layout(template="plotly_white", height=500, font=dict(family="Roboto", size=12))
+fig.show()
+
+```
+
+``` {python}
+#| label: random-forest-regression
+#| code-fold: true
+#| code-summary: "View Random Forest code"
+
+print("="*80)
+print("MODEL 2: RANDOM FOREST REGRESSION")
+print("="*80)
+
+# Train model
+rf_reg = RandomForestRegressor(
+    n_estimators=100,
+    max_depth=20,
+    min_samples_split=10,
+    min_samples_leaf=4,
+    random_state=42,
+    n_jobs=-1
+)
+
+print("Training Random Forest model...")
+rf_reg.fit(X_train, y_train)
+print("✓ Training complete!")
+
+# Make predictions
+y_pred_rf = rf_reg.predict(X_test)
+
+# Calculate evaluation metrics
+rmse_rf = np.sqrt(mean_squared_error(y_test, y_pred_rf))
+r2_rf = r2_score(y_test, y_pred_rf)
+mae_rf = np.mean(np.abs(y_test - y_pred_rf))
+
+print(f"\n Model Performance:")
+print(f"   • R² Score: {r2_rf:.4f}")
+print(f"     → Explains {r2_rf*100:.2f}% of salary variance")
+print(f"   • RMSE: ${rmse_rf:,.2f}")
+print(f"   • MAE: ${mae_rf:,.2f}")
+
+# Feature importance
+importance_df = pd.DataFrame({
+    'Feature': feature_cols,
+    'Importance': rf_reg.feature_importances_
+}).sort_values('Importance', ascending=False)
+
+print(f"\n Top 10 Most Important Features:")
+print(importance_df.head(10).to_string(index=False))
+
+# Calculate improvement safely
+if r2_lin > 0:
+    improvement = ((r2_rf - r2_lin) / r2_lin) * 100
+    print(f"\n🚀 Random Forest improves R² by {improvement:.1f}% over Linear Regression")
+
+```
+
+``` {python}
+#| label: visualize-feature-importance
+#| code-fold: true
+
+# Visualize feature importance
+top_features_rf = importance_df.head(15)
+
+fig = px.bar(
+    top_features_rf,
+    x='Importance',
+    y='Feature',
+    orientation='h',
+    title='Top 15 Feature Importance - Random Forest Regression',
+    labels={'Importance': 'Importance Score', 'Feature': 'Feature'},
+    color='Importance',
+    color_continuous_scale='Viridis'
+)
+
+fig.update_layout(template="plotly_white", height=500, font=dict(family="Roboto", size=12))
+fig.show()
+
+```
+
+```{python}
+#| label: model-comparison-regression
+#| code-fold: true
+
+print("="*80)
+print("REGRESSION MODEL COMPARISON")
+print("="*80)
+
+# Create comparison dataframe
+comparison_df = pd.DataFrame({
+    'Model': ['Multiple Linear Regression', 'Random Forest Regression'],
+    'R² Score': [r2_lin, r2_rf],
+    'RMSE ($)': [rmse_lin, rmse_rf],
+    'MAE ($)': [mae_lin, mae_rf]
+})
+
+print("\n" + comparison_df.to_string(index=False))
+
+best_model = comparison_df.loc[comparison_df['R² Score'].idxmax(), 'Model']
+best_r2 = comparison_df['R² Score'].max()
+
+print(f"\n🏆 Best Performing Model: {best_model}")
+print(f"   • Achieves R² of {best_r2:.4f}")
+print(f"   • Explains {best_r2*100:.2f}% of salary variance")
+
+```
+
+``` {python}
+#| label: predictions-vs-actual
+#| code-fold: true
+
+# Sample for performance
+sample_size = min(2000, len(y_test))
+indices = np.random.choice(len(y_test), sample_size, replace=False)
+
+comparison_results = pd.DataFrame({
+    'Actual': y_test.iloc[indices],
+    'Linear_Regression': y_pred_lin[indices],
+    'Random_Forest': y_pred_rf[indices]
+})
+
+fig = go.Figure()
+
+# Random Forest predictions
+fig.add_trace(go.Scatter(
+    x=comparison_results['Actual'],
+    y=comparison_results['Random_Forest'],
+    mode='markers',
+    name='Random Forest',
+    opacity=0.6,
+    marker=dict(size=5, color='blue')
+))
+
+# Linear Regression predictions
+fig.add_trace(go.Scatter(
+    x=comparison_results['Actual'],
+    y=comparison_results['Linear_Regression'],
+    mode='markers',
+    name='Linear Regression',
+    opacity=0.6,
+    marker=dict(size=5, color='red')
+))
+
+# Perfect prediction line
+min_val = comparison_results['Actual'].min()
+max_val = comparison_results['Actual'].max()
+
+fig.add_trace(go.Scatter(
+    x=[min_val, max_val],
+    y=[min_val, max_val],
+    mode='lines',
+    name='Perfect Prediction',
+    line=dict(color='green', dash='dash', width=2)
+))
+
+fig.update_layout(
+    title=f'Actual vs Predicted Salary - Model Comparison (n={sample_size:,})',
+    xaxis_title='Actual Salary ($)',
+    yaxis_title='Predicted Salary ($)',
+    template="plotly_white",
+    height=550,
+    hovermode='closest'
+)
+
+fig.show()
+
 ```
