@@ -5,6 +5,12 @@ format:
     code-fold: true
     code-summary: "Show code"
     code-tools: true
+    
+execute:
+  echo: false
+  eval: false
+  output: true
+  freeze: auto
 ---
 
 
