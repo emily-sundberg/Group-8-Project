@@ -130,7 +130,7 @@
     "href": "ml_methods.html",
     "title": "ML Methods",
     "section": "",
-    "text": "Show code\nimport pandas as pd\nimport numpy as np\nimport plotly.graph_objects as go\nimport plotly.io as pio\nfrom plotly.subplots import make_subplots\n\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import LabelEncoder, StandardScaler\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.ensemble import RandomForestRegressor\nfrom sklearn.cluster import KMeans\nfrom sklearn.metrics import mean_squared_error, r2_score, silhouette_score\n\nimport warnings\nwarnings.filterwarnings('ignore')\n\n# Set Plotly theme\npio.templates.default = \"plotly_white\"\n\nprint(\"✓ All libraries loaded successfully!\")"
+    "text": "Show code\nimport pandas as pd\nimport numpy as np\nimport plotly.express as px\nimport plotly.graph_objects as go\nimport plotly.io as pio\nfrom plotly.subplots import make_subplots\n\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import LabelEncoder, StandardScaler\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.ensemble import RandomForestRegressor\nfrom sklearn.cluster import KMeans\nfrom sklearn.metrics import mean_squared_error, r2_score, silhouette_score\n\nimport warnings\nwarnings.filterwarnings('ignore')\n\n# Set Plotly theme\npio.templates.default = \"plotly_white\"\n\nprint(\"✓ All libraries loaded successfully!\")"
   },
   {
     "objectID": "ml_methods.html#data-loading-and-exploration",
