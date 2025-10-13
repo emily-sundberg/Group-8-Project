@@ -1,3 +1,13 @@
+---
+title: "ML Methods"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show code"
+    code-tools: true
+---
+
+
 ``` {python}
 #| label: setup-topic-2-2
 #| warning: false
@@ -86,10 +96,29 @@ print(f"Removed {removed_rows:,} rows with missing salary or state data")
 print(f"Final dataset: {len(df_clean):,} rows")
 ```
 
-``` {python}
+```{python}
+```{python}
 #| label: political-leaning-creation
+#| code-fold: true
 
-# Create political leaning variable based on 2024 presidential election
+# State name to abbreviation mapping
+state_to_abbrev = {
+    'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
+    'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
+    'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
+    'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS',
+    'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+    'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
+    'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
+    'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
+    'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
+    'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+    'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT',
+    'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV',
+    'Wisconsin': 'WI', 'Wyoming': 'WY', 'District of Columbia': 'DC'
+}
+
+# Political classifications based on 2024 presidential election
 red_states = [
     'AL', 'AK', 'AR', 'FL', 'ID', 'IN', 'IA', 'KS', 'KY', 
     'LA', 'MS', 'MO', 'MT', 'NE', 'ND', 'OH', 'OK', 'SC', 
@@ -105,26 +134,45 @@ blue_states = [
 swing_states = ['AZ', 'GA', 'NC', 'NV']
 
 def assign_political_leaning(state):
+    """Classify state by political leaning"""
     if pd.isna(state):
         return 'Unknown'
-    state = str(state).strip().upper()
-    if state in red_states:
+    
+    # Convert to string and clean
+    state_str = str(state).strip()
+    
+    # Try to get abbreviation if full name provided
+    state_abbrev = state_to_abbrev.get(state_str, state_str.upper())
+    
+    # Classify
+    if state_abbrev in red_states:
         return 'Red'
-    elif state in blue_states:
+    elif state_abbrev in blue_states:
         return 'Blue'
-    elif state in swing_states:
+    elif state_abbrev in swing_states:
         return 'Swing'
     else:
         return 'Other'
 
+# Apply classification
 df_clean['political_leaning'] = df_clean['STATE'].apply(assign_political_leaning)
 
-print("\nPolitical Leaning Distribution:")
+# Display results
+print("="*60)
+print("POLITICAL LEANING DISTRIBUTION")
+print("="*60)
+print("\nDistribution:")
 print(df_clean['political_leaning'].value_counts())
 print(f"\nPercentage:")
 print((df_clean['political_leaning'].value_counts() / len(df_clean) * 100).round(2))
-```
 
+# Debug: Check for "Other" classifications
+if df_clean['political_leaning'].value_counts().get('Other', 0) > 0:
+    print(f"\n⚠️ States classified as 'Other':")
+    other_states = df_clean[df_clean['political_leaning'] == 'Other']['STATE'].value_counts()
+    print(other_states.head(10))
+```
+```
 ``` {python}
 #| label: visualize-political-distribution
 
@@ -141,6 +189,8 @@ fig.show()
 ```
 
 ## K-Means Clustering (unsupervised)
+
+### Setup and Feature Engineering
 
 ```{python}
 #| label: clustering-reference-label
@@ -162,4 +212,202 @@ print(f"Unique values: {df_clean[reference_label].nunique():,}")
 print(f"\nTop 10 {reference_label} categories:")
 print(df_clean[reference_label].value_counts().head(10))
 
+```
+``` {python}
+#| label: clustering-feature-engineering
+
+# Prepare features for clustering
+df_cluster = df_clean.copy()
+
+# Encode categorical variables
+encoders = {}
+categorical_cols = ['STATE', 'TITLE', 'political_leaning', 'LIGHTCAST_SECTORS']
+
+print("\nEncoding categorical variables for clustering:")
+for col in categorical_cols:
+    if col in df_cluster.columns:
+        le = LabelEncoder()
+        df_cluster[f'{col}_encoded'] = le.fit_transform(
+            df_cluster[col].fillna('Unknown').astype(str)
+        )
+        encoders[col] = le
+        print(f"  ✓ Encoded: {col}")
+
+# Select clustering features
+clustering_features = ['SALARY']
+
+for col in categorical_cols:
+    encoded_col = f'{col}_encoded'
+    if encoded_col in df_cluster.columns:
+        clustering_features.append(encoded_col)
+
+# Add years of experience if available
+if 'MIN_YEARS_EXPERIENCE' in df_cluster.columns:
+    df_cluster['MIN_YEARS_EXPERIENCE'] = pd.to_numeric(
+        df_cluster['MIN_YEARS_EXPERIENCE'], errors='coerce'
+    )
+    clustering_features.append('MIN_YEARS_EXPERIENCE')
+
+print(f"\nFinal Clustering Features ({len(clustering_features)}):")
+for i, feature in enumerate(clustering_features, 1):
+    print(f"  {i}. {feature}")
+
+# Prepare feature matrix
+X_cluster = df_cluster[clustering_features].fillna(df_cluster[clustering_features].mean())
+print(f"\nFeature Matrix Shape: {X_cluster.shape}")
+```
+
+### Determine Optimal K
+
+```{python}
+#| label: determine-optimal-clusters
+
+# Determine optimal number of clusters using Elbow Method and Silhouette Score
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_cluster)
+
+K_range = range(2, 11)
+inertias = []
+silhouette_scores = []
+
+print("Testing different numbers of clusters...")
+print(f"{'k':<5} {'Inertia':<15} {'Silhouette Score'}")
+print("-" * 40)
+
+for k in K_range:
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    kmeans.fit(X_scaled)
+    inertias.append(kmeans.inertia_)
+    sil_score = silhouette_score(X_scaled, kmeans.labels_)
+    silhouette_scores.append(sil_score)
+    print(f"{k:<5} {kmeans.inertia_:<15.2f} {sil_score:.4f}")
+
+optimal_k = list(K_range)[silhouette_scores.index(max(silhouette_scores))]
+print(f"\n💡 Optimal k based on Silhouette Score: {optimal_k}")
+```
+
+```{python}
+#| label: plot-elbow-silhouette
+
+# Visualize elbow curve and silhouette scores
+fig = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=('Elbow Method', 'Silhouette Score Method')
+)
+
+fig.add_trace(
+    go.Scatter(x=list(K_range), y=inertias, mode='lines+markers', 
+               name='Inertia', line=dict(color='blue')),
+    row=1, col=1
+)
+
+fig.add_trace(
+    go.Scatter(x=list(K_range), y=silhouette_scores, mode='lines+markers', 
+               name='Silhouette', line=dict(color='orange')),
+    row=1, col=2
+)
+
+fig.update_xaxes(title_text="Number of Clusters (k)", row=1, col=1)
+fig.update_xaxes(title_text="Number of Clusters (k)", row=1, col=2)
+fig.update_yaxes(title_text="Inertia", row=1, col=1)
+fig.update_yaxes(title_text="Silhouette Score", row=1, col=2)
+
+fig.update_layout(
+    height=400, 
+    showlegend=False, 
+    template="plotly_white",
+    title_text="Determining Optimal Number of Clusters"
+)
+fig.show()
+
+```
+
+### Cluster Analysis
+
+``` {python}
+#| label: perform-kmeans
+
+# Perform KMeans clustering with k=5 (per assignment requirements)
+n_clusters = 5
+
+print(f"Performing KMeans with k={n_clusters} clusters...")
+kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+df_cluster['cluster'] = kmeans.fit_predict(X_scaled)
+
+print(f"✓ Clustering complete!")
+print(f"\nCluster Distribution:")
+cluster_counts = df_cluster['cluster'].value_counts().sort_index()
+for cluster_id, count in cluster_counts.items():
+    pct = (count / len(df_cluster)) * 100
+    print(f"  Cluster {cluster_id}: {count:,} jobs ({pct:.1f}%)")
+
+```
+
+``` {python}
+#| label: visualize-clusters
+
+# Visualize clusters (sample for performance)
+sample_size = min(5000, len(df_cluster))
+df_sample = df_cluster.sample(sample_size, random_state=42)
+
+fig = px.scatter(
+    df_sample,
+    x='SALARY',
+    y='STATE_encoded',
+    color='cluster',
+    hover_data=['TITLE', 'political_leaning', reference_label] if 'TITLE' in df_sample.columns else None,
+    title=f'KMeans Clustering Results (k={n_clusters}, n={sample_size:,} sample)',
+    labels={'SALARY': 'Annual Salary ($)', 'STATE_encoded': 'State (Encoded)', 'cluster': 'Cluster'},
+    color_continuous_scale='Viridis'
+)
+fig.update_layout(template="plotly_white", height=500)
+fig.show()
+```
+**Key Findings:**
+- Cluster 0: Entry-level positions ($50-100k)
+- Cluster 4: Senior roles ($200k+)
+- Geographic clustering evident by state encoding
+
+```{python}
+#| label: cluster-profiling
+
+# Analyze cluster characteristics
+print("="*80)
+print("CLUSTER PROFILES")
+print("="*80)
+
+cluster_profiles = df_cluster.groupby('cluster').agg({
+    'SALARY': ['mean', 'median', 'std', 'min', 'max'],
+    'political_leaning': lambda x: x.mode()[0] if len(x.mode()) > 0 else 'Mixed',
+    'cluster': 'count'
+})
+
+cluster_profiles.columns = [
+    'Avg_Salary', 'Median_Salary', 'Salary_StdDev', 'Min_Salary', 'Max_Salary',
+    'Dominant_Political', 'Count'
+]
+
+print(cluster_profiles.round(2))
+
+```
+
+```{python}
+#| label: visualize-cluster-profiles
+
+# Visualize cluster salary profiles
+profile_df = cluster_profiles.reset_index()
+
+fig = px.bar(
+    profile_df,
+    x='cluster',
+    y='Avg_Salary',
+    text='Count',
+    title='Average Salary by Cluster',
+    labels={'cluster': 'Cluster', 'Avg_Salary': 'Average Salary ($)'},
+    color='Avg_Salary',
+    color_continuous_scale='Viridis'
+)
+fig.update_traces(texttemplate='n=%{text:,}', textposition='outside')
+fig.update_layout(template="plotly_white", height=450)
+fig.show()
 ```
