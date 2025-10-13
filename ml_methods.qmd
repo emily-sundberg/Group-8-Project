@@ -173,8 +173,9 @@ if df_clean['political_leaning'].value_counts().get('Other', 0) > 0:
 ```
 ``` {python}
 #| label: visualize-political-distribution
+#| code-fold: true
 
-# Visualize political distribution
+# Visualize political leaning distribution
 fig = px.pie(
     values=df_clean['political_leaning'].value_counts().values,
     names=df_clean['political_leaning'].value_counts().index,
@@ -192,8 +193,9 @@ fig.show()
 
 ```{python}
 #| label: clustering-reference-label
+#| code-fold: true
 
-# Determine which reference label to use
+# Determine which reference label to use (SOC, NAICS, or ONET)
 reference_label = None
 for label in ['SOC_2', 'NAICS_2022_2', 'ONET', 'LIGHTCAST_SECTORS']:
     if label in df_clean.columns and df_clean[label].notna().sum() > 0:
@@ -202,26 +204,31 @@ for label in ['SOC_2', 'NAICS_2022_2', 'ONET', 'LIGHTCAST_SECTORS']:
         break
 
 if reference_label is None:
-    print("Using TITLE as reference.")
+    print("No classification column found. Using TITLE as reference.")
     reference_label = 'TITLE'
 
 print(f"\nReference Label: {reference_label}")
 print(f"Unique values: {df_clean[reference_label].nunique():,}")
 print(f"\nTop 10 {reference_label} categories:")
 print(df_clean[reference_label].value_counts().head(10))
-
 ```
 ``` {python}
 #| label: clustering-feature-engineering
+#| code-fold: true
+#| code-summary: "View feature engineering code"
 
 # Prepare features for clustering
 df_cluster = df_clean.copy()
+
+print("="*80)
+print("FEATURE ENGINEERING FOR CLUSTERING")
+print("="*80)
 
 # Encode categorical variables
 encoders = {}
 categorical_cols = ['STATE', 'TITLE', 'political_leaning', 'LIGHTCAST_SECTORS']
 
-print("\nEncoding categorical variables for clustering:")
+print(f"\nEncoding categorical variables:")
 for col in categorical_cols:
     if col in df_cluster.columns:
         le = LabelEncoder()
@@ -229,7 +236,7 @@ for col in categorical_cols:
             df_cluster[col].fillna('Unknown').astype(str)
         )
         encoders[col] = le
-        print(f"  ✓ Encoded: {col}")
+        print(f"  ✓ {col}: {df_cluster[col].nunique()} unique values")
 
 # Select clustering features
 clustering_features = ['SALARY']
@@ -245,8 +252,10 @@ if 'MIN_YEARS_EXPERIENCE' in df_cluster.columns:
         df_cluster['MIN_YEARS_EXPERIENCE'], errors='coerce'
     )
     clustering_features.append('MIN_YEARS_EXPERIENCE')
+    print(f"  ✓ MIN_YEARS_EXPERIENCE: numeric feature")
 
-print(f"\nFinal Clustering Features ({len(clustering_features)}):")
+print(f"\n📊 Total Clustering Features: {len(clustering_features)}")
+print("\nFeature List:")
 for i, feature in enumerate(clustering_features, 1):
     print(f"  {i}. {feature}")
 
@@ -259,11 +268,14 @@ print(f"\nFeature Matrix Shape: {X_cluster.shape}")
 
 ```{python}
 #| label: determine-optimal-clusters
+#| code-fold: true
+#| code-summary: "View elbow method code"
 
-# Determine optimal number of clusters using Elbow Method and Silhouette Score
+# Standardize features
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_cluster)
 
+# Test different numbers of clusters
 K_range = range(2, 11)
 inertias = []
 silhouette_scores = []
@@ -286,6 +298,7 @@ print(f"\n💡 Optimal k based on Silhouette Score: {optimal_k}")
 
 ```{python}
 #| label: plot-elbow-silhouette
+#| code-fold: true
 
 # Visualize elbow curve and silhouette scores
 fig = make_subplots(
@@ -317,15 +330,15 @@ fig.update_layout(
     title_text="Determining Optimal Number of Clusters"
 )
 fig.show()
-
 ```
 
 ### Cluster Analysis
 
 ``` {python}
 #| label: perform-kmeans
+#| code-fold: true
 
-# Perform KMeans clustering with k=5 (per assignment requirements)
+# Perform KMeans with k=5 (per assignment requirements)
 n_clusters = 5
 
 print(f"Performing KMeans with k={n_clusters} clusters...")
@@ -343,8 +356,9 @@ for cluster_id, count in cluster_counts.items():
 
 ``` {python}
 #| label: visualize-clusters
+#| code-fold: true
 
-# Visualize clusters (sample for performance)
+# Sample for performance (5000 points)
 sample_size = min(5000, len(df_cluster))
 df_sample = df_cluster.sample(sample_size, random_state=42)
 
@@ -358,7 +372,7 @@ fig = px.scatter(
     labels={'SALARY': 'Annual Salary ($)', 'STATE_encoded': 'State (Encoded)', 'cluster': 'Cluster'},
     color_continuous_scale='Viridis'
 )
-fig.update_layout(template="plotly_white", height=500)
+fig.update_layout(template="plotly_white", height=550, font=dict(family="Roboto", size=12))
 fig.show()
 ```
 **Key Findings:**
@@ -368,6 +382,7 @@ fig.show()
 
 ```{python}
 #| label: cluster-profiling
+#| code-fold: true
 
 # Analyze cluster characteristics
 print("="*80)
@@ -385,12 +400,14 @@ cluster_profiles.columns = [
     'Dominant_Political', 'Count'
 ]
 
-print(cluster_profiles.round(2))
+cluster_profiles = cluster_profiles.round(2)
+print(cluster_profiles)
 
 ```
 
 ```{python}
 #| label: visualize-cluster-profiles
+#| code-fold: true
 
 # Visualize cluster salary profiles
 profile_df = cluster_profiles.reset_index()
@@ -406,8 +423,32 @@ fig = px.bar(
     color_continuous_scale='Viridis'
 )
 fig.update_traces(texttemplate='n=%{text:,}', textposition='outside')
-fig.update_layout(template="plotly_white", height=450)
+fig.update_layout(template="plotly_white", height=450, font=dict(family="Roboto", size=12))
 fig.show()
+```
+
+```{python}
+#| label: cluster-reference-comparison
+#| code-fold: true
+
+# Compare clusters with reference labels
+print(f"\n{'='*80}")
+print(f"CLUSTER vs {reference_label.upper()} COMPARISON")
+print(f"{'='*80}")
+
+for cluster_id in sorted(df_cluster['cluster'].unique()):
+    cluster_data = df_cluster[df_cluster['cluster'] == cluster_id]
+    top_categories = cluster_data[reference_label].value_counts().head(5)
+    
+    print(f"\n📊 Cluster {cluster_id}:")
+    print(f"   Size: {len(cluster_data):,} jobs")
+    print(f"   Avg Salary: ${cluster_data['SALARY'].mean():,.2f}")
+    if 'political_leaning' in cluster_data.columns:
+        print(f"   Dominant Political: {cluster_data['political_leaning'].mode()[0] if len(cluster_data['political_leaning'].mode()) > 0 else 'Mixed'}")
+    print(f"   Top 5 {reference_label} categories:")
+    for category, count in top_categories.items():
+        pct = (count / len(cluster_data)) * 100
+        print(f"     • {category}: {count:,} ({pct:.1f}%)")
 ```
 
 ## Multiple Regression Analysis
@@ -460,18 +501,15 @@ for num_feat in numeric_features:
             feature_cols.append(num_feat)
             print(f"  ✓ {num_feat}: numeric feature added")
 
-print(f"\n📊 Total Features for Salary Prediction: {len(feature_cols)}")
-print("\nFeature List:")
-for i, feature in enumerate(feature_cols, 1):
-    print(f"  {i}. {feature}")
+print(f"\n Total Features for Salary Prediction: {len(feature_cols)}")
 
 # Prepare X and y
 X = df_reg[feature_cols].fillna(df_reg[feature_cols].mean())
 y = df_reg['SALARY']
 
-print(f"\n📈 Dataset Statistics:")
+print(f"\n Dataset Statistics:")
 print(f"  • Feature Matrix Shape: {X.shape}")
-print(f"  • Target Variable (Salary):")
+print(f"  • Salary Statistics:")
 print(f"    - Mean: ${y.mean():,.2f}")
 print(f"    - Median: ${y.median():,.2f}")
 print(f"    - Std Dev: ${y.std():,.2f}")
@@ -501,8 +539,69 @@ print("="*80)
 print(f"\nTraining Set: {X_train.shape[0]:,} samples ({X_train.shape[0]/len(X)*100:.1f}%)")
 print(f"Test Set: {X_test.shape[0]:,} samples ({X_test.shape[0]/len(X)*100:.1f}%)")
 print(f"\nSalary Distribution:")
-print(f"  Training Set - Mean: ${y_train.mean():,.2f}, Std: ${y_train.std():,.2f}")
-print(f"  Test Set - Mean: ${y_test.mean():,.2f}, Std: ${y_test.std():,.2f}")
+print(f"  Training - Mean: ${y_train.mean():,.2f}, Std: ${y_train.std():,.2f}")
+print(f"  Test - Mean: ${y_test.mean():,.2f}, Std: ${y_test.std():,.2f}")
+
+```
+
+```{python}
+#| label: multiple-linear-regression
+#| code-fold: true
+#| code-summary: "View Linear Regression code"
+
+print("="*80)
+print("MODEL 1: MULTIPLE LINEAR REGRESSION")
+print("="*80)
+
+# Train model
+lin_reg = LinearRegression()
+lin_reg.fit(X_train, y_train)
+
+# Make predictions
+y_pred_lin = lin_reg.predict(X_test)
+
+# Calculate evaluation metrics
+rmse_lin = np.sqrt(mean_squared_error(y_test, y_pred_lin))
+r2_lin = r2_score(y_test, y_pred_lin)
+mae_lin = np.mean(np.abs(y_test - y_pred_lin))
+
+print(f"\n📊 Model Performance:")
+print(f"   • R² Score: {r2_lin:.4f}")
+print(f"     → Explains {r2_lin*100:.2f}% of salary variance")
+print(f"   • RMSE: ${rmse_lin:,.2f}")
+print(f"   • MAE: ${mae_lin:,.2f}")
+
+# Feature coefficients
+coef_df = pd.DataFrame({
+    'Feature': feature_cols,
+    'Coefficient': lin_reg.coef_
+}).sort_values('Coefficient', key=abs, ascending=False)
+
+print(f"\n📈 Top 10 Most Influential Features:")
+print(coef_df.head(10).to_string(index=False))
+```
+
+```{python}
+#| label: visualize-linear-coefficients
+#| code-fold: true
+
+# Visualize top 15 feature coefficients
+top_features = coef_df.head(15)
+
+fig = px.bar(
+    top_features,
+    x='Coefficient',
+    y='Feature',
+    orientation='h',
+    title='Top 15 Feature Coefficients - Multiple Linear Regression',
+    labels={'Coefficient': 'Impact on Salary ($)', 'Feature': 'Feature'},
+    color='Coefficient',
+    color_continuous_scale='RdBu',
+    color_continuous_midpoint=0
+)
+
+fig.update_layout(template="plotly_white", height=500, font=dict(family="Roboto", size=12))
+fig.show()
 
 ```
 
@@ -537,7 +636,7 @@ rmse_rf = np.sqrt(mean_squared_error(y_test, y_pred_rf))
 r2_rf = r2_score(y_test, y_pred_rf)
 mae_rf = np.mean(np.abs(y_test - y_pred_rf))
 
-print(f"\n📊 Model Performance:")
+print(f"\n Model Performance:")
 print(f"   • R² Score: {r2_rf:.4f}")
 print(f"     → Explains {r2_rf*100:.2f}% of salary variance")
 print(f"   • RMSE: ${rmse_rf:,.2f}")
@@ -549,12 +648,63 @@ importance_df = pd.DataFrame({
     'Importance': rf_reg.feature_importances_
 }).sort_values('Importance', ascending=False)
 
-print(f"\n📈 Top 10 Most Important Features:")
+print(f"\n Top 10 Most Important Features:")
 print(importance_df.head(10).to_string(index=False))
 
-# Calculate improvement over linear regression
-improvement = ((r2_rf - r2_lin) / r2_lin) * 100 if r2_lin > 0 else 0
-print(f"\n🚀 Random Forest improves R² by {improvement:.1f}% over Linear Regression")
+# Calculate improvement safely
+if r2_lin > 0:
+    improvement = ((r2_rf - r2_lin) / r2_lin) * 100
+    print(f"\n🚀 Random Forest improves R² by {improvement:.1f}% over Linear Regression")
+
+```
+
+``` {python}
+#| label: visualize-feature-importance
+#| code-fold: true
+
+# Visualize feature importance
+top_features_rf = importance_df.head(15)
+
+fig = px.bar(
+    top_features_rf,
+    x='Importance',
+    y='Feature',
+    orientation='h',
+    title='Top 15 Feature Importance - Random Forest Regression',
+    labels={'Importance': 'Importance Score', 'Feature': 'Feature'},
+    color='Importance',
+    color_continuous_scale='Viridis'
+)
+
+fig.update_layout(template="plotly_white", height=500, font=dict(family="Roboto", size=12))
+fig.show()
+
+```
+
+```{python}
+#| label: model-comparison-regression
+#| code-fold: true
+
+print("="*80)
+print("REGRESSION MODEL COMPARISON")
+print("="*80)
+
+# Create comparison dataframe
+comparison_df = pd.DataFrame({
+    'Model': ['Multiple Linear Regression', 'Random Forest Regression'],
+    'R² Score': [r2_lin, r2_rf],
+    'RMSE ($)': [rmse_lin, rmse_rf],
+    'MAE ($)': [mae_lin, mae_rf]
+})
+
+print("\n" + comparison_df.to_string(index=False))
+
+best_model = comparison_df.loc[comparison_df['R² Score'].idxmax(), 'Model']
+best_r2 = comparison_df['R² Score'].max()
+
+print(f"\n🏆 Best Performing Model: {best_model}")
+print(f"   • Achieves R² of {best_r2:.4f}")
+print(f"   • Explains {best_r2*100:.2f}% of salary variance")
 
 ```
 
@@ -562,7 +712,7 @@ print(f"\n🚀 Random Forest improves R² by {improvement:.1f}% over Linear Regr
 #| label: predictions-vs-actual
 #| code-fold: true
 
-# Sample data for visualization (performance optimization)
+# Sample for performance
 sample_size = min(2000, len(y_test))
 indices = np.random.choice(len(y_test), sample_size, replace=False)
 
@@ -572,7 +722,6 @@ comparison_results = pd.DataFrame({
     'Random_Forest': y_pred_rf[indices]
 })
 
-# Create scatter plot
 fig = go.Figure()
 
 # Random Forest predictions
@@ -582,11 +731,7 @@ fig.add_trace(go.Scatter(
     mode='markers',
     name='Random Forest',
     opacity=0.6,
-    marker=dict(
-        size=5,
-        color='blue',
-        line=dict(width=0.5, color='darkblue')
-    )
+    marker=dict(size=5, color='blue')
 ))
 
 # Linear Regression predictions
@@ -596,16 +741,12 @@ fig.add_trace(go.Scatter(
     mode='markers',
     name='Linear Regression',
     opacity=0.6,
-    marker=dict(
-        size=5,
-        color='red',
-        line=dict(width=0.5, color='darkred')
-    )
+    marker=dict(size=5, color='red')
 ))
 
 # Perfect prediction line
-min_val = min(y_test.min(), y_pred_rf.min(), y_pred_lin.min())
-max_val = max(y_test.max(), y_pred_rf.max(), y_pred_lin.max())
+min_val = comparison_results['Actual'].min()
+max_val = comparison_results['Actual'].max()
 
 fig.add_trace(go.Scatter(
     x=[min_val, max_val],
@@ -622,64 +763,6 @@ fig.update_layout(
     template="plotly_white",
     height=550,
     hovermode='closest'
-)
-
-fig.show()
-
-```
-
-``` {python}
-#| label: residual-analysis
-#| code-fold: true
-
-# Calculate residuals
-residuals_lin = y_test - y_pred_lin
-residuals_rf = y_test - y_pred_rf
-
-# Create residual plots
-fig = make_subplots(
-    rows=1, cols=2,
-    subplot_titles=('Linear Regression Residuals', 'Random Forest Residuals')
-)
-
-# Linear Regression residuals
-fig.add_trace(
-    go.Scatter(
-        x=y_pred_lin,
-        y=residuals_lin,
-        mode='markers',
-        name='Linear Reg',
-        marker=dict(size=4, color='red', opacity=0.5)
-    ),
-    row=1, col=1
-)
-
-# Random Forest residuals
-fig.add_trace(
-    go.Scatter(
-        x=y_pred_rf,
-        y=residuals_rf,
-        mode='markers',
-        name='Random Forest',
-        marker=dict(size=4, color='blue', opacity=0.5)
-    ),
-    row=1, col=2
-)
-
-# Add zero line
-for col in [1, 2]:
-    fig.add_hline(y=0, line_dash="dash", line_color="green", row=1, col=col)
-
-fig.update_xaxes(title_text="Predicted Salary ($)", row=1, col=1)
-fig.update_xaxes(title_text="Predicted Salary ($)", row=1, col=2)
-fig.update_yaxes(title_text="Residuals ($)", row=1, col=1)
-fig.update_yaxes(title_text="Residuals ($)", row=1, col=2)
-
-fig.update_layout(
-    height=450,
-    showlegend=False,
-    template="plotly_white",
-    title_text="Residual Analysis - Prediction Errors"
 )
 
 fig.show()
