@@ -409,3 +409,279 @@ fig.update_traces(texttemplate='n=%{text:,}', textposition='outside')
 fig.update_layout(template="plotly_white", height=450)
 fig.show()
 ```
+
+## Multiple Regression Analysis
+
+``` {python}
+#| label: regression-feature-engineering
+#| code-fold: true
+#| code-summary: "View feature engineering code"
+
+# Prepare features for salary prediction
+df_reg = df_clean.copy()
+
+print("="*80)
+print("FEATURE ENGINEERING FOR SALARY PREDICTION")
+print("="*80)
+
+# Encode categorical variables
+le_reg = {}
+categorical_features = ['STATE', 'TITLE', 'political_leaning', 'LIGHTCAST_SECTORS']
+
+# Add SOC or NAICS if available
+if 'SOC_2' in df_reg.columns:
+    categorical_features.append('SOC_2')
+elif 'NAICS_2022_2' in df_reg.columns:
+    categorical_features.append('NAICS_2022_2')
+
+print(f"\nCategorical features to encode ({len(categorical_features)}):")
+for col in categorical_features:
+    if col in df_reg.columns:
+        le = LabelEncoder()
+        df_reg[f'{col}_encoded'] = le.fit_transform(
+            df_reg[col].fillna('Unknown').astype(str)
+        )
+        le_reg[col] = le
+        print(f"  ✓ {col}: {df_reg[col].nunique()} unique values")
+
+# Select features for regression
+feature_cols = []
+for col in categorical_features:
+    encoded_col = f'{col}_encoded'
+    if encoded_col in df_reg.columns:
+        feature_cols.append(encoded_col)
+
+# Add numerical features if available
+numeric_features = ['MIN_YEARS_EXPERIENCE', 'MAX_YEARS_EXPERIENCE']
+for num_feat in numeric_features:
+    if num_feat in df_reg.columns:
+        df_reg[num_feat] = pd.to_numeric(df_reg[num_feat], errors='coerce')
+        if df_reg[num_feat].notna().sum() > 0:
+            feature_cols.append(num_feat)
+            print(f"  ✓ {num_feat}: numeric feature added")
+
+print(f"\n📊 Total Features for Salary Prediction: {len(feature_cols)}")
+print("\nFeature List:")
+for i, feature in enumerate(feature_cols, 1):
+    print(f"  {i}. {feature}")
+
+# Prepare X and y
+X = df_reg[feature_cols].fillna(df_reg[feature_cols].mean())
+y = df_reg['SALARY']
+
+print(f"\n📈 Dataset Statistics:")
+print(f"  • Feature Matrix Shape: {X.shape}")
+print(f"  • Target Variable (Salary):")
+print(f"    - Mean: ${y.mean():,.2f}")
+print(f"    - Median: ${y.median():,.2f}")
+print(f"    - Std Dev: ${y.std():,.2f}")
+print(f"    - Range: ${y.min():,.2f} - ${y.max():,.2f}")
+```
+Feature Selection Justification:
+The features were selected based on their theoretical and empirical relationship with salary:
+
+STATE & Political Leaning: Geographic location and political climate influence cost of living and compensation policies
+TITLE: Job title is the primary indicator of role level and responsibility
+LIGHTCAST_SECTORS: Industry sector determines baseline compensation structure
+SOC/NAICS: Occupation classification provides standardized job categorization
+Years of Experience: Direct correlation with salary progression (if available)
+
+``` {python}
+#| label: train-test-split-regression
+#| code-fold: true
+
+# Split data (70/30 as per assignment requirements)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.30, random_state=42
+)
+
+print("="*80)
+print("TRAIN/TEST SPLIT")
+print("="*80)
+print(f"\nTraining Set: {X_train.shape[0]:,} samples ({X_train.shape[0]/len(X)*100:.1f}%)")
+print(f"Test Set: {X_test.shape[0]:,} samples ({X_test.shape[0]/len(X)*100:.1f}%)")
+print(f"\nSalary Distribution:")
+print(f"  Training Set - Mean: ${y_train.mean():,.2f}, Std: ${y_train.std():,.2f}")
+print(f"  Test Set - Mean: ${y_test.mean():,.2f}, Std: ${y_test.std():,.2f}")
+
+```
+
+``` {python}
+#| label: random-forest-regression
+#| code-fold: true
+#| code-summary: "View Random Forest code"
+
+print("="*80)
+print("MODEL 2: RANDOM FOREST REGRESSION")
+print("="*80)
+
+# Train model
+rf_reg = RandomForestRegressor(
+    n_estimators=100,
+    max_depth=20,
+    min_samples_split=10,
+    min_samples_leaf=4,
+    random_state=42,
+    n_jobs=-1
+)
+
+print("Training Random Forest model...")
+rf_reg.fit(X_train, y_train)
+print("✓ Training complete!")
+
+# Make predictions
+y_pred_rf = rf_reg.predict(X_test)
+
+# Calculate evaluation metrics
+rmse_rf = np.sqrt(mean_squared_error(y_test, y_pred_rf))
+r2_rf = r2_score(y_test, y_pred_rf)
+mae_rf = np.mean(np.abs(y_test - y_pred_rf))
+
+print(f"\n📊 Model Performance:")
+print(f"   • R² Score: {r2_rf:.4f}")
+print(f"     → Explains {r2_rf*100:.2f}% of salary variance")
+print(f"   • RMSE: ${rmse_rf:,.2f}")
+print(f"   • MAE: ${mae_rf:,.2f}")
+
+# Feature importance
+importance_df = pd.DataFrame({
+    'Feature': feature_cols,
+    'Importance': rf_reg.feature_importances_
+}).sort_values('Importance', ascending=False)
+
+print(f"\n📈 Top 10 Most Important Features:")
+print(importance_df.head(10).to_string(index=False))
+
+# Calculate improvement over linear regression
+improvement = ((r2_rf - r2_lin) / r2_lin) * 100 if r2_lin > 0 else 0
+print(f"\n🚀 Random Forest improves R² by {improvement:.1f}% over Linear Regression")
+
+```
+
+``` {python}
+#| label: predictions-vs-actual
+#| code-fold: true
+
+# Sample data for visualization (performance optimization)
+sample_size = min(2000, len(y_test))
+indices = np.random.choice(len(y_test), sample_size, replace=False)
+
+comparison_results = pd.DataFrame({
+    'Actual': y_test.iloc[indices],
+    'Linear_Regression': y_pred_lin[indices],
+    'Random_Forest': y_pred_rf[indices]
+})
+
+# Create scatter plot
+fig = go.Figure()
+
+# Random Forest predictions
+fig.add_trace(go.Scatter(
+    x=comparison_results['Actual'],
+    y=comparison_results['Random_Forest'],
+    mode='markers',
+    name='Random Forest',
+    opacity=0.6,
+    marker=dict(
+        size=5,
+        color='blue',
+        line=dict(width=0.5, color='darkblue')
+    )
+))
+
+# Linear Regression predictions
+fig.add_trace(go.Scatter(
+    x=comparison_results['Actual'],
+    y=comparison_results['Linear_Regression'],
+    mode='markers',
+    name='Linear Regression',
+    opacity=0.6,
+    marker=dict(
+        size=5,
+        color='red',
+        line=dict(width=0.5, color='darkred')
+    )
+))
+
+# Perfect prediction line
+min_val = min(y_test.min(), y_pred_rf.min(), y_pred_lin.min())
+max_val = max(y_test.max(), y_pred_rf.max(), y_pred_lin.max())
+
+fig.add_trace(go.Scatter(
+    x=[min_val, max_val],
+    y=[min_val, max_val],
+    mode='lines',
+    name='Perfect Prediction',
+    line=dict(color='green', dash='dash', width=2)
+))
+
+fig.update_layout(
+    title=f'Actual vs Predicted Salary - Model Comparison (n={sample_size:,})',
+    xaxis_title='Actual Salary ($)',
+    yaxis_title='Predicted Salary ($)',
+    template="plotly_white",
+    height=550,
+    hovermode='closest'
+)
+
+fig.show()
+
+```
+
+``` {python}
+#| label: residual-analysis
+#| code-fold: true
+
+# Calculate residuals
+residuals_lin = y_test - y_pred_lin
+residuals_rf = y_test - y_pred_rf
+
+# Create residual plots
+fig = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=('Linear Regression Residuals', 'Random Forest Residuals')
+)
+
+# Linear Regression residuals
+fig.add_trace(
+    go.Scatter(
+        x=y_pred_lin,
+        y=residuals_lin,
+        mode='markers',
+        name='Linear Reg',
+        marker=dict(size=4, color='red', opacity=0.5)
+    ),
+    row=1, col=1
+)
+
+# Random Forest residuals
+fig.add_trace(
+    go.Scatter(
+        x=y_pred_rf,
+        y=residuals_rf,
+        mode='markers',
+        name='Random Forest',
+        marker=dict(size=4, color='blue', opacity=0.5)
+    ),
+    row=1, col=2
+)
+
+# Add zero line
+for col in [1, 2]:
+    fig.add_hline(y=0, line_dash="dash", line_color="green", row=1, col=col)
+
+fig.update_xaxes(title_text="Predicted Salary ($)", row=1, col=1)
+fig.update_xaxes(title_text="Predicted Salary ($)", row=1, col=2)
+fig.update_yaxes(title_text="Residuals ($)", row=1, col=1)
+fig.update_yaxes(title_text="Residuals ($)", row=1, col=2)
+
+fig.update_layout(
+    height=450,
+    showlegend=False,
+    template="plotly_white",
+    title_text="Residual Analysis - Prediction Errors"
+)
+
+fig.show()
+
+```
