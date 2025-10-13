@@ -96,7 +96,7 @@ fig.write_html("./output/salary_affiliation.html")
 <iframe width="900" height="650" src="./output/salary_affiliation.html" title="Salary By State Political Affiliation"></iframe>
 ```
 
-This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation. 
+This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. In red states, Professional, Scientific, and Technical Services has a slightly higher average salary. 
 
 ## Exploring the minimum education level by political affiliation
 
@@ -310,7 +310,11 @@ fig = px.bar(
     x="count",
     y="STATE_ABBREVIATION",
     orientation="h",
-    color="AFFILIATION",
+    color = "AFFILIATION",
+    color_discrete_map={
+    "Red": "red",
+    "Blue": "blue"
+    },
     hover_data=["avg_salary"],  # Show average salary on hover
     title="Number of AI Job Postings by State and Affiliation",
     labels={"count": "Job Postings", "STATE_ABBREVIATION": "State"}
@@ -320,7 +324,8 @@ fig.update_layout(
     yaxis={'categoryorder':'total ascending'},
     xaxis_title="Number of Job Postings",
     yaxis_title="State",
-    legend_title="Affiliation"
+    legend_title="Affiliation",
+    template="plotly_white"
 )
 
 fig.show()
@@ -330,8 +335,10 @@ fig.write_html("./output/AI_byState.html")
 
 
 ```{=html}
-<iframe width="900" height="650" src="./output/AI_byState.html" title="Number of AI Job Postings by State"></iframe>
+<iframe width="900" height="900" src="./output/AI_byState.html" title="Number of AI Job Postings by State"></iframe>
 ```
+
+This graph clearly shows that of the top 5 states with the most number of AI job postings, 4/5 of them are blue states. 
 
 
 ```{python}
@@ -372,7 +379,7 @@ fig = px.bar(
     ai_naics_combined,
     x="Industry",
     y="count",
-    color="NAICS_Level",
+    color = "NAICS_Level"
     barmode="group",
     hover_data=["NAICS_Level", "count"],
     title="Job Posting Counts Across NAICS Levels 2–6",
@@ -384,8 +391,7 @@ fig.update_layout(
     xaxis_tickangle=-45,
     yaxis_title="Number of Job Postings",
     xaxis_title="Industry",
-    template="plotly_white",
-    legend_title="NAICS Level"
+    template="plotly_white"
 )
 
 fig.show()
@@ -394,6 +400,10 @@ fig.write_html("./output/AI_industries.html")
 
 ```
 
+
+
 ```{=html}
-<iframe width="900" height="650" src="./output/AI_industries.html" title="Number of AI Job Postings by Industry"></iframe>
+<iframe width="900" height="900" src="./output/AI_industries.html" title="Number of AI Job Postings by Industry"></iframe>
 ```
+
+This graph is showing us the number of job postings by NAICS. For AI jobs, the NAICS with the largest number of AI job postings. Computer Systems Design is predominate NAICS with consulting services coming in second. 

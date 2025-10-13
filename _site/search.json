@@ -109,7 +109,7 @@
     "href": "eda.html",
     "title": "Exploratory Data Analysis",
     "section": "",
-    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation."
+    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. In red states, Professional, Scientific, and Technical Services has a slightly higher average salary."
   },
   {
     "objectID": "data_cleaning.html",
@@ -137,7 +137,7 @@
     "href": "eda.html#exploring-the-salary-by-state-political-affiliation",
     "title": "Exploratory Data Analysis",
     "section": "",
-    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. Professional, Scientific, and Technical Services appears to be about equal regardless of affiliation."
+    "text": "This data clearly shows that average salaries are slightly higher in Blue states vs Red States across nearly all NAICS2 categories. In red states, Professional, Scientific, and Technical Services has a slightly higher average salary."
   },
   {
     "objectID": "eda.html#exploring-the-minimum-education-level-by-political-affiliation",
@@ -151,7 +151,7 @@
     "href": "eda.html#ai-jobs-analysis",
     "title": "Exploratory Data Analysis",
     "section": "AI Jobs Analysis",
-    "text": "AI Jobs Analysis\n\nThis figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.\n\nSimilarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states."
+    "text": "AI Jobs Analysis\n\nThis figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.\n\nSimilarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states.\n\nThis graph clearly shows that of the top 5 states with the most number of AI job postings, 4/5 of them are blue states.\n\nThis graph is showing us the number of job postings by NAICS. For AI jobs, the NAICS with the largest number of AI job postings. Computer Systems Design is predominate NAICS with consulting services coming in second."
   },
   {
     "objectID": "ml_methods.html",
