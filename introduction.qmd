@@ -22,16 +22,16 @@ execute:
 
 # Abstract
 
-We analyze gender disparities in hiring, AI participation, and wages across U.S. industries and states, and situate these patterns in a global context. Drawing on recent federal statistics (@bls2025cps), U.S. pay-gap trackers (@aauw2025simpletruth; @iwpr2024gap), and international reports (@oecd2024algorithm; @ilo2023genai; @ilo2025exposure; @wef2025ggg), we find persistent occupational segregation, widening U.S. annual earnings gaps since 2022, and continued underrepresentation of women in AI-intensive roles. State-level disparities correlate with policy environments such as pay-transparency and salary-history bans (@aauw2025state), though industry composition and family structure are important confounders. Conservative/market-based perspectives emphasize occupational choice, hours, and career continuity as key mechanisms and warn that some transparency policies may compress wages (@aei; @heritage; @cullen2021; @cullen2023; @mas2014transparency). We integrate both views and outline implications for job seekers selecting sectors, geographies, and employers.
+We analyze gender disparities in hiring, AI participation, and wages across U.S. industries and states, and situate these patterns in a global context. Drawing on recent federal statistics @bls2025cps, U.S. pay-gap trackers @aauw2025simpletruth; @iwpr2024gap, and international reports @oecd2024algorithm; @ilo2023genai; @ilo2025exposure; @wef2025ggg, we find persistent occupational segregation, widening U.S. annual earnings gaps since 2022, and continued underrepresentation of women in AI-intensive roles. State-level disparities correlate with policy environments such as pay-transparency and salary-history bans @aauw2025state, though industry composition and family structure are important confounders. Conservative/market-based perspectives emphasize occupational choice, hours, and career continuity as key mechanisms and warn that some transparency policies may compress wages @aei; @heritage; @cullen2021; @cullen2023; @mas2014transparency. We integrate both views and outline implications for job seekers selecting sectors, geographies, and employers.
 
 # Executive Summary
 
-- U.S. employment remains gender-segregated: women ≈47% of workers but overrepresented in health/education and underrepresented in construction, engineering, and many tech roles (@bls2025cps).
-- Every U.S. state has a pay gap; gaps tend to be smaller where transparency and equal-pay policies are stronger, though composition matters (@aauw2025state).
-- U.S. annual earnings gap widened after 2022 (82.7¢ in 2023; ≈80.9¢ in 2024 among full-time year-round), while hourly measures show ~85% in 2024 (@iwpr2024gap; @pew2025gap).
-- Women remain 22–30% of the global AI workforce and are more exposed to AI-driven task change in clerical/admin roles (@oecd2024algorithm; @ilo2023genai; @ilo2025exposure).
-- Globally, parity stands at 68.8% and may take ~123 years at current pace (@wef2025ggg).
-- Market-oriented analyses attribute much of the unadjusted gap to hours, occupation, and career continuity and note possible wage compression from transparency (@aei; @heritage; @cullen2021; @cullen2023; @mas2014transparency).
+- U.S. employment remains gender-segregated: women ≈47% of workers but overrepresented in health/education and underrepresented in construction, engineering, and many tech roles @bls2025cps.
+- Every U.S. state has a pay gap; gaps tend to be smaller where transparency and equal-pay policies are stronger, though composition matters @aauw2025state.
+- U.S. annual earnings gap widened after 2022 (82.7¢ in 2023; ≈80.9¢ in 2024 among full-time year-round), while hourly measures show ~85% in 2024 @iwpr2024gap; @pew2025gap.
+- Women remain 22–30% of the global AI workforce and are more exposed to AI-driven task change in clerical/admin roles @oecd2024algorithm; @ilo2023genai; @ilo2025exposure.
+- Globally, parity stands at 68.8% and may take ~123 years at current pace @wef2025ggg.
+- Market-oriented analyses attribute much of the unadjusted gap to hours, occupation, and career continuity and note possible wage compression from transparency @aei; @heritage; @cullen2021; @cullen2023; @mas2014transparency.
 - Implications: build AI-complementary skills, target transparent employers and supportive states/metros, and use posted pay bands as inputs to evidence-based negotiation.
 
 # Introduction
@@ -40,53 +40,46 @@ Gender continues to shape labor-market outcomes in the United States and worldwi
 
 # Qualitative Research Method
 
-We triangulate multiple sources: U.S. Bureau of Labor Statistics Current Population Survey (CPS) 2024 annual averages for occupational distributions (@bls2025cps); AAUW 2025 national and state pay-gap indicators (@aauw2025simpletruth; @aauw2025state); IWPR 2024 fact sheets on annual earnings gaps (@iwpr2024gap); Pew Research Center 2025 hourly pay-gap analysis (@pew2025gap); OECD 2024 policy brief on AI and women (@oecd2024algorithm); International Labour Organization reports on generative-AI exposure (2023; 2025 update) (@ilo2023genai; @ilo2025exposure); and the WEF 2025 Global Gender Gap Report (@wef2025ggg). To incorporate conservative/market perspectives, we review AEI and Heritage commentary (@aei; @heritage) and research on equilibrium effects of pay transparency (@cullen2021; @cullen2023; @mas2014transparency).
+We triangulate multiple sources: U.S. Bureau of Labor Statistics Current Population Survey (CPS) 2024 annual averages for occupational distributions @bls2025cps; AAUW 2025 national and state pay-gap indicators @aauw2025simpletruth; @aauw2025state; IWPR 2024 fact sheets on annual earnings gaps @iwpr2024gap; Pew Research Center 2025 hourly pay-gap analysis @pew2025gap; OECD 2024 policy brief on AI and women @oecd2024algorithm; International Labour Organization reports on generative-AI exposure (2023; 2025 update) @ilo2023genai; @ilo2025exposure; and the WEF 2025 Global Gender Gap Report @wef2025ggg. To incorporate conservative/market perspectives, we review AEI and Heritage commentary @aei; @heritage and research on equilibrium effects of pay transparency @cullen2021; @cullen2023; @mas2014transparency.
 
 # Hiring Patterns Across Industries (U.S. and Global)
 
-U.S. employment remains gender-segregated. CPS 2024 annual averages indicate women comprise roughly 47% of total employment but are more concentrated in health care, education, and service roles, with lower shares in construction, engineering, and portions of tech (@bls2025cps). Internationally, the World Economic Forum (2025) estimates overall global gender parity at 68.8%, with economic participation parity at about 60–61%, implying persistent cross-country segmentation (@wef2025ggg). Market-oriented analyses argue that part of observed differences in outcomes reflect hours worked, occupation mix, and career continuity rather than like-for-like pay differences (@aei; @heritage).
+U.S. employment remains gender-segregated. CPS 2024 annual averages indicate women comprise roughly 47% of total employment but are more concentrated in health care, education, and service roles, with lower shares in construction, engineering, and portions of tech @bls2025cps. Internationally, the World Economic Forum (2025) estimates overall global gender parity at 68.8%, with economic participation parity at about 60–61%, implying persistent cross-country segmentation @wef2025ggg. Market-oriented analyses argue that part of observed differences in outcomes reflect hours worked, occupation mix, and career continuity rather than like-for-like pay differences @aei; @heritage.
 
 # State Politics and Gender Disparities (Red vs. Blue)
 
-AAUW’s 2025 analysis shows that every U.S. state has a gender pay gap, with substantial dispersion across states (@aauw2025state). Cross-state differences correlate with policy adoption such as salary-history bans and pay-transparency requirements, which are more prevalent in many blue states (@aauw2025state). However, composition matters: industry mix (e.g., energy and construction), unionization, urbanization, and childcare access vary across states and can generate red–blue patterns without ideology being the sole driver. Earlier peer-reviewed work associates state liberalism with narrower gaps, but causality remains difficult to establish (@maume2015state). Recent reporting suggests that post-pandemic return-to-office mandates have reduced flexibility and may contribute to widening national gaps, though these effects likely differ by state and sector (@washingtonpost2025rto).
+AAUW’s 2025 analysis shows that every U.S. state has a gender pay gap, with substantial dispersion across states @aauw2025state. Cross-state differences correlate with policy adoption such as salary-history bans and pay-transparency requirements, which are more prevalent in many blue states @aauw2025state. However, composition matters: industry mix (e.g., energy and construction), unionization, urbanization, and childcare access vary across states and can generate red–blue patterns without ideology being the sole driver. Earlier peer-reviewed work associates state liberalism with narrower gaps, but causality remains difficult to establish @maume2015state. Recent reporting suggests that post-pandemic return-to-office mandates have reduced flexibility and may contribute to widening national gaps, though these effects likely differ by state and sector @washingtonpost2025rto.
 
 ## Embedded visualization: AAUW live state map
+## Gender Pay Gap by State (AAUW 2025)
 
-::: {.callout-note}
-**Tip:** The live embed is perfect for your qualitative section. For PDF exports, also include a static image below as fallback.
-:::
+AAUW’s 2025 analysis shows that every U.S. state has a gender pay gap, with substantial dispersion across states. The static figure below summarizes the pattern for qualitative discussion; click the button to view the live, interactive map on AAUW’s site.
 
-<!-- Live interactive map (works on your published HTML site) -->
-<iframe 
-  src="https://www.aauw.org/resources/article/gender-pay-gap-by-state/" 
-  width="100%" 
-  height="650" 
-  style="border:none" 
-  loading="lazy"
-  title="AAUW 2025 Gender Pay Gap by State">
-</iframe>
+![AAUW 2025 Gender Pay Gap Map](figures/aauw_gender_gap_map_2025.png){fig-align="center" width="100%"}
 
-<!-- Optional PDF fallback (uncomment if you save a PNG locally)
-![AAUW 2025 Gender Pay Gap Map](figures/aauw_gender_gap_map_2025.png)
--->
+<div style="text-align:center; margin-top: 0.5rem;">
+  <a class="btn btn-primary" href="https://www.aauw.org/resources/article/gender-pay-gap-by-state/" target="_blank" rel="noopener">
+    Open Interactive Map on AAUW.org
+  </a>
+</div>
 
 *Source: @aauw2025state.*
 
 # Women in AI Fields (U.S. & Global) and Political Context
 
-Women remain underrepresented in AI and tech roles. The OECD documents lower female representation in AI-exposed professional occupations and constrained access to AI tools (@oecd2024algorithm). The ILO shows that clerical and administrative tasks—female-heavy—are highly exposed to generative-AI transformation in high-income countries; a 2025 refinement confirms the asymmetric exposure (@ilo2023genai; @ilo2025exposure). Direct state-by-state measures of female AI participation are limited. It is therefore premature to assert causality from political ideology to AI underrepresentation without merging employer-level AI job postings and hires with state policy and industry controls. Nonetheless, differences in STEM pipelines, childcare, higher education, and transparency regimes plausibly contribute to cross-state variation (@ilo2023genai; @ilo2025exposure; @oecd2024algorithm).
+Women remain underrepresented in AI and tech roles. The OECD documents lower female representation in AI-exposed professional occupations and constrained access to AI tools @oecd2024algorithm. The ILO shows that clerical and administrative tasks—female-heavy—are highly exposed to generative-AI transformation in high-income countries; a 2025 refinement confirms the asymmetric exposure @ilo2023genai; @ilo2025exposure. Direct state-by-state measures of female AI participation are limited. It is therefore premature to assert causality from political ideology to AI underrepresentation without merging employer-level AI job postings and hires with state policy and industry controls. Nonetheless, differences in STEM pipelines, childcare, higher education, and transparency regimes plausibly contribute to cross-state variation @ilo2023genai; @ilo2025exposure; @oecd2024algorithm.
 
 # Wage Gaps and Political Affiliation
 
-On annual full-time, year-round earnings, IWPR reports a deterioration from 2022 to 2023 (82.7¢) and news coverage indicates about 80.9¢ in 2024—the lowest since 2016 (@iwpr2024gap; @newsweek2025gap). By contrast, Pew Research Center’s hourly series shows women earned about 85% of men’s hourly pay in 2024 when combining full- and part-time workers (@pew2025gap). Adjusted gaps shrink after controlling for occupation, hours, and experience but do not disappear (@aei; @pew2025gap). Policy can narrow gaps: pay-transparency laws are associated with smaller within-firm gaps but may compress overall wages or slow wage growth according to equilibrium analyses (@cullen2021; @cullen2023; @mas2014transparency).
+On annual full-time, year-round earnings, IWPR reports a deterioration from 2022 to 2023 (82.7¢) and news coverage indicates about 80.9¢ in 2024—the lowest since 2016 @iwpr2024gap; @newsweek2025gap. By contrast, Pew Research Center’s hourly series shows women earned about 85% of men’s hourly pay in 2024 when combining full- and part-time workers @pew2025gap. Adjusted gaps shrink after controlling for occupation, hours, and experience but do not disappear @aei; @pew2025gap. Policy can narrow gaps: pay-transparency laws are associated with smaller within-firm gaps but may compress overall wages or slow wage growth according to equilibrium analyses @cullen2021; @cullen2023; @mas2014transparency.
 
 # Implications for Job Seekers (2025)
 
-- **Sector choice:** Target underrepresented, higher-growth fields such as data, AI, and engineering while building verifiable skills, certifications, and portfolios (@bls2025cps; @oecd2024algorithm).
-- **Geography:** Favor states and metros with pay-transparency requirements and supportive care infrastructure while benchmarking offers with state snapshots (@aauw2025state).
-- **AI resilience:** Develop AI-complementary skills to hedge exposure in clerical/admin roles and to compete for AI-adjacent, higher-pay tracks (@ilo2023genai; @oecd2024algorithm).
-- **Employer screening:** Prefer organizations with posted pay bands, career-progression transparency, and flexible/hybrid policies as RTO mandates may widen disparities (@washingtonpost2025rto).
-- **Negotiation:** Use posted ranges as inputs, not anchors, and negotiate based on documented contributions; be aware of transparency’s potential compression effects (@cullen2021; @cullen2023; @mas2014transparency).
+- **Sector choice:** Target underrepresented, higher-growth fields such as data, AI, and engineering while building verifiable skills, certifications, and portfolios @bls2025cps; @oecd2024algorithm.
+- **Geography:** Favor states and metros with pay-transparency requirements and supportive care infrastructure while benchmarking offers with state snapshots @aauw2025state.
+- **AI resilience:** Develop AI-complementary skills to hedge exposure in clerical/admin roles and to compete for AI-adjacent, higher-pay tracks @ilo2023genai; @oecd2024algorithm.
+- **Employer screening:** Prefer organizations with posted pay bands, career-progression transparency, and flexible/hybrid policies as RTO mandates may widen disparities @washingtonpost2025rto.
+- **Negotiation:** Use posted ranges as inputs, not anchors, and negotiate based on documented contributions; be aware of transparency’s potential compression effects @cullen2021; @cullen2023; @mas2014transparency.
 
 # Limitations
 

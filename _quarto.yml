@@ -28,4 +28,4 @@ execute:
   code-fold: true
 
 bibliography: references.bib
-csl: csl/econometrica.csl
+csl: csl/apa7.csl
