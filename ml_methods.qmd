@@ -9,7 +9,7 @@ format:
 
 execute:
   echo: true
-  eval: true
+  eval: false
   output: true
   freeze: auto
 ---
@@ -325,7 +325,15 @@ fig.update_layout(
     title_text="Determining Optimal Number of Clusters"
 )
 fig.show()
+
+fig.write_html("./output/elbow_curve.html")
 ```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/elbow_curve.html" title="Elbow Curve and Silhouette Score"></iframe>
+```
+
 
 ### Cluster Analysis
 
@@ -369,7 +377,17 @@ fig = px.scatter(
 )
 fig.update_layout(template="plotly_white", height=550, font=dict(family="Roboto", size=12))
 fig.show()
+
+fig.write_html("./output/clusters.html")
+
 ```
+
+```{=html}
+<iframe width="900" height="650" src="./output/clusters.html" title="Clusters"></iframe>
+```
+
+
+
 **Key Findings:**
 - Cluster 0: Entry-level positions ($50-100k)
 - Cluster 4: Senior roles ($200k+)
@@ -420,6 +438,13 @@ fig = px.bar(
 fig.update_traces(texttemplate='n=%{text:,}', textposition='outside')
 fig.update_layout(template="plotly_white", height=450, font=dict(family="Roboto", size=12))
 fig.show()
+
+fig.write_html("./output/cluster_profiles.html")
+
+```
+
+```{=html}
+<iframe width="900" height="650" src="./output/cluster_profiles.html" title="Cluster Profiles"></iframe>
 ```
 
 ```{python}
@@ -598,6 +623,12 @@ fig = px.bar(
 fig.update_layout(template="plotly_white", height=500, font=dict(family="Roboto", size=12))
 fig.show()
 
+fig.write_html("./output/linear_coefficients.html")
+
+```
+
+```{=html}
+<iframe width="900" height="650" src="./output/linear_coefficients.html" title="Linear Coefficients"></iframe>
 ```
 
 ``` {python}
@@ -674,7 +705,15 @@ fig = px.bar(
 fig.update_layout(template="plotly_white", height=500, font=dict(family="Roboto", size=12))
 fig.show()
 
+fig.write_html("./output/feature_importance.html")
+
 ```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/feature_importance.html" title="Feature Importance for Random Forest Regression"></iframe>
+```
+
 
 ```{python}
 #| label: model-comparison-regression
@@ -762,4 +801,10 @@ fig.update_layout(
 
 fig.show()
 
+fig.write_html("./output/model_comparison.html")
+
+```
+
+```{=html}
+<iframe width="900" height="650" src="./output/model_comparison.html" title="Model Comparison"></iframe>
 ```
