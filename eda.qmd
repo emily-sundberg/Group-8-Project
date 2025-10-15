@@ -37,6 +37,14 @@ eda.show(15)
 
 ```
 
+
+
+
+## Introduction
+
+The following visualizations are based on the lightcast job postings data frame that was cleaned in the previous section. This analysis explores different facets of the data specifically related to the political affiliation of the states and the different job postings in each state. We also take a closer look at AI related jobs and the impact of political climate on salary. 
+
+
 ## Exploring the Salary by State Political Affiliation
 
 ```{python}
@@ -379,7 +387,7 @@ fig = px.bar(
     ai_naics_combined,
     x="Industry",
     y="count",
-    color = "NAICS_Level"
+    color = "NAICS_Level",
     barmode="group",
     hover_data=["NAICS_Level", "count"],
     title="Job Posting Counts Across NAICS Levels 2–6",
@@ -407,3 +415,136 @@ fig.write_html("./output/AI_industries.html")
 ```
 
 This graph is showing us the number of job postings by NAICS. For AI jobs, the NAICS with the largest number of AI job postings. Computer Systems Design is predominate NAICS with consulting services coming in second. 
+
+```{python}
+#eda.select("NAICS2_NAME").distinct().show(25, truncate = False)
+
+from pyspark.sql import functions as F
+
+gender_jobs = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("./data/Gender_Industries.csv")
+gender_jobs.createOrReplaceTempView("gender_industries")
+
+
+sorted_gender_jobs = (
+    gender_jobs
+    .orderBy(F.desc("TOTAL_NUMBER_OF_WOMEN"))
+    .select("NAICS_NAME", "NUMBER_OF_PEOPLE","TOTAL_NUMBER_OF_WOMEN", "PERCENT_WOMEN")
+    .limit(10)
+)
+
+#sorted_gender_jobs.show()
+
+sorted_gender_jobs = sorted_gender_jobs.toPandas()
+
+```
+
+
+```{python}
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=sorted_gender_jobs["NAICS_NAME"],
+    y=sorted_gender_jobs["TOTAL_NUMBER_OF_WOMEN"],
+    name="Number of Women",
+    yaxis="y1"
+))
+
+fig.add_trace(go.Scatter(
+    x=sorted_gender_jobs["NAICS_NAME"],
+    y=sorted_gender_jobs["PERCENT_WOMEN"],
+    name="% Women",
+    yaxis="y2",
+    mode="lines+markers"
+))
+
+
+fig.update_layout(
+    title="Top 10 Industries by Number of Women",
+    xaxis=dict(title="Industry (NAICS_NAME)"),
+    yaxis=dict(title="Number of Women", side="left"),
+    yaxis2=dict(
+        title="% Women",
+        overlaying="y",
+        side="right"
+    ),
+    legend=dict(x=0.02, y=0.98),
+    template="plotly_white",
+    xaxis_tickangle=-45
+)
+
+fig.show()
+
+fig.write_html("./output/gender_and_industry.html")
+```
+
+
+```{=html}
+<iframe width="900" height="900" src="./output/gender_and_industry.html" title="Industries With The Most Women vs Percent of Women in the Industry"></iframe>
+```
+
+The above graph has two different important features. First, it shows the top 10 industries for women on the bar chart, sorted by the overall number of women according the U.S. Bureau of Labor Statistics. The second important feature is the line chart which shows the percentage of women in that field. As you can see, some of the most female dominated industries do not have very many women in them and some of the industries with the most women are heavily male dominated. 
+
+```{python}
+
+from pyspark.sql import functions as F
+import plotly.graph_objects as go
+from pyspark.sql.functions import col
+
+gender_jobs = gender_jobs.withColumn("NUMBER_OF_PEOPLE", col ("NUMBER_OF_PEOPLE").cast("float"))\
+
+sorted_gender_jobs = (
+    gender_jobs
+    .orderBy(F.desc("NUMBER_OF_PEOPLE"))
+    .select("NAICS_NAME", "NUMBER_OF_PEOPLE","TOTAL_NUMBER_OF_WOMEN", "PERCENT_WOMEN")
+    .limit(10)
+)
+
+sorted_gender_jobs.show()
+sorted_gender_jobs_pd = sorted_gender_jobs.toPandas()
+
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=sorted_gender_jobs_pd["NAICS_NAME"],
+    y=sorted_gender_jobs_pd["NUMBER_OF_PEOPLE"],
+    name="Number of People",
+    yaxis="y1"
+))
+
+fig.add_trace(go.Scatter(
+    x=sorted_gender_jobs_pd["NAICS_NAME"],
+    y=sorted_gender_jobs_pd["PERCENT_WOMEN"],
+    name="% Women",
+    yaxis="y2",
+    mode="lines+markers"
+))
+
+fig.update_layout(
+    title="Top 10 Industries by Number of People",
+    xaxis=dict(title="Industry (NAICS_NAME)"),
+    yaxis=dict(title="Percent Female", side="left"),
+    yaxis2=dict(
+        title="% Women",
+        overlaying="y",
+        side="right"
+    ),
+    legend=dict(x=0.02, y=0.98),
+    template="plotly_white",
+    xaxis_tickangle=-45
+)
+
+fig.show()
+
+fig.write_html("./output/industry_gender_gap.html")
+
+```
+
+
+```{=html}
+<iframe width="900" height="900" src="./output/industry_gender_gap.html" title="Industries with the Most Number of People vs the Number of Women in Those Industries"></iframe>
+```
+
+The above figure shows the top 10 industries with the most number of employed individuals based on data from the U.S. Bureau of Labor Statistics. The blue bars show the number of people in those industries, and the red bars show the number of women in the industry. 

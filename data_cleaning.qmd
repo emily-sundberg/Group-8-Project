@@ -48,7 +48,10 @@ elections_df.createOrReplaceTempView("election_results")
 ```
 
 
-# Data Cleaning
+## Data Cleaning
+
+The following code cleans and standardizes the job postings dataset — ensuring proper data types, filling missing salaries, removing duplicates, categorizing remote types, and dropping overly sparse columns — to produce a clean, analysis-ready DataFrame.
+
 
 ```{python}
 # casting corrected variable type
@@ -133,6 +136,7 @@ jobs_df = jobs_df.select(columns_to_keep)
 
 ```
 
+This part of the script joins in another data frame that has the 2024 presidential election results by state. This allows us to use the states' political affiliation as an attribute of the job posting. 
 
 
 ```{python}
@@ -155,7 +159,7 @@ jobs_df = jobs_df.withColumnRenamed("Affiliation", "AFFILIATION")
 #jobs_df.show(15)
 ```
 
-
+Now, this script selects only the columns we want to look at specifically 
 
 ```{python}
 selected_df = jobs_df.select(
@@ -198,6 +202,8 @@ selected_df = jobs_df.select(
   "MIDPOINT_SALARY"
 )
 ```
+
+Once we have the columns we want to look at, we create a heat map to show us the remaining missing values. We have already dealt with a lot of missing values earlier, but this will help us visualize what is left. 
 
 ```{python}
 
@@ -242,7 +248,7 @@ hvplot.save(missing, './output/missing_heatmap.html')
 <iframe width="900" height="650" src="./output/missing_heatmap.html" title="Missing Values Heatmap"></iframe>
 ```
 
-
+As you can see above, the missing values are mainly in the columns for minimum years of experience, and MSA name. The following script cleans up some of the column values and replaces missing values with an appropriate substitute such as 0 or "unknown".
 
 ```{python}
 
@@ -374,6 +380,7 @@ selected_df = selected_df.withColumn(
 
 ```
 
+Finally, we have a clean dataset so we will convert it to a pandas dataframe and save it a csv.
 
 ```{python}
 
