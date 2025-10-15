@@ -173,6 +173,13 @@ fig = px.pie(
 )
 fig.update_layout(template="plotly_white", height=400)
 fig.show()
+
+fig.write_html("./output/visualize_political_distribution.html")
+```
+
+
+```{=html}
+<iframe width="900" height="650" src="./output/visualize_political_distribution.html" title="Distribution of Jobs by Political Leaning of State"></iframe>
 ```
 
 ## K-Means Clustering (unsupervised)
