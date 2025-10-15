@@ -26,3 +26,6 @@ execute:
   echo: true
   eval: true
   code-fold: true
+
+bibliography: references.bib
+csl: csl/econometrica.csl
