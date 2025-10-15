@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.4.549" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="author" content="Pranathi Nagasai Andhe">
+<meta name="author" content="Emily Sunderberg">
+<meta name="dcterms.date" content="2025-10-15">
 
-<meta name="author" content="Pranathi Nagasai Andhe" />
-<meta name="author" content="Emily Sunderberg" />
-<meta name="dcterms.date" content="2025-10-15" />
-
-<title>Job Market Analysis 2024 – Gender Disparities in Hiring &amp; Political Influence (U.S. and Global, 2024–2025)</title>
+<title>Job Market Analysis 2024 - Gender Disparities in Hiring &amp; Political Influence (U.S. and Global, 2024–2025)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -46,7 +44,23 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,47 +93,45 @@ div.csl-indent {
 
 </head>
 
-<body>
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="/index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Job Market Analysis 2024</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/introduction.html"> 
+    <a class="nav-link active" href="./introduction.html" aria-current="page"> 
 <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/data_cleaning.html"> 
+    <a class="nav-link" href="./data_cleaning.html"> 
 <span class="menu-text">Data Cleaning &amp; Exploration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/eda.html"> 
+    <a class="nav-link" href="./eda.html"> 
 <span class="menu-text">Exploratory Data Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/skill_gap_analysis.html"> 
+    <a class="nav-link" href="./skill_gap_analysis.html"> 
 <span class="menu-text">Skill Gap Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/ml_methods.html"> 
+    <a class="nav-link" href="./ml_methods.html"> 
 <span class="menu-text">ML Methods</span></a>
   </li>  
 </ul>
@@ -134,7 +146,26 @@ div.csl-indent {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract"><span class="header-section-number">1</span> Abstract</a></li>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link" data-scroll-target="#executive-summary"><span class="header-section-number">2</span> Executive Summary</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">3</span> Introduction</a></li>
+  <li><a href="#qualitative-research-method" id="toc-qualitative-research-method" class="nav-link" data-scroll-target="#qualitative-research-method"><span class="header-section-number">4</span> Qualitative Research Method</a></li>
+  <li><a href="#hiring-patterns-across-industries-u.s.-and-global" id="toc-hiring-patterns-across-industries-u.s.-and-global" class="nav-link" data-scroll-target="#hiring-patterns-across-industries-u.s.-and-global"><span class="header-section-number">5</span> Hiring Patterns Across Industries (U.S. and Global)</a></li>
+  <li><a href="#state-politics-and-gender-disparities-red-vs.-blue" id="toc-state-politics-and-gender-disparities-red-vs.-blue" class="nav-link" data-scroll-target="#state-politics-and-gender-disparities-red-vs.-blue"><span class="header-section-number">6</span> State Politics and Gender Disparities (Red vs.&nbsp;Blue)</a>
+  <ul class="collapse">
+  <li><a href="#embedded-visualization-aauw-live-state-map" id="toc-embedded-visualization-aauw-live-state-map" class="nav-link" data-scroll-target="#embedded-visualization-aauw-live-state-map"><span class="header-section-number">6.1</span> Embedded visualization: AAUW live state map</a></li>
+  </ul></li>
+  <li><a href="#women-in-ai-fields-u.s.-global-and-political-context" id="toc-women-in-ai-fields-u.s.-global-and-political-context" class="nav-link" data-scroll-target="#women-in-ai-fields-u.s.-global-and-political-context"><span class="header-section-number">7</span> Women in AI Fields (U.S. &amp; Global) and Political Context</a></li>
+  <li><a href="#wage-gaps-and-political-affiliation" id="toc-wage-gaps-and-political-affiliation" class="nav-link" data-scroll-target="#wage-gaps-and-political-affiliation"><span class="header-section-number">8</span> Wage Gaps and Political Affiliation</a></li>
+  <li><a href="#implications-for-job-seekers-2025" id="toc-implications-for-job-seekers-2025" class="nav-link" data-scroll-target="#implications-for-job-seekers-2025"><span class="header-section-number">9</span> Implications for Job Seekers (2025)</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">10</span> Limitations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">11</span> Conclusion</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="introduction.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -170,26 +201,7 @@ div.csl-indent {
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#abstract" id="toc-abstract"><span class="header-section-number">1</span> Abstract</a></li>
-  <li><a href="#executive-summary" id="toc-executive-summary"><span class="header-section-number">2</span> Executive Summary</a></li>
-  <li><a href="#introduction" id="toc-introduction"><span class="header-section-number">3</span> Introduction</a></li>
-  <li><a href="#qualitative-research-method" id="toc-qualitative-research-method"><span class="header-section-number">4</span> Qualitative Research Method</a></li>
-  <li><a href="#hiring-patterns-across-industries-u.s.-and-global" id="toc-hiring-patterns-across-industries-u.s.-and-global"><span class="header-section-number">5</span> Hiring Patterns Across Industries (U.S. and Global)</a></li>
-  <li><a href="#state-politics-and-gender-disparities-red-vs.-blue" id="toc-state-politics-and-gender-disparities-red-vs.-blue"><span class="header-section-number">6</span> State Politics and Gender Disparities (Red vs. Blue)</a>
-  <ul>
-  <li><a href="#embedded-visualization-aauw-live-state-map" id="toc-embedded-visualization-aauw-live-state-map"><span class="header-section-number">6.1</span> Embedded visualization: AAUW live state map</a></li>
-  </ul></li>
-  <li><a href="#women-in-ai-fields-u.s.-global-and-political-context" id="toc-women-in-ai-fields-u.s.-global-and-political-context"><span class="header-section-number">7</span> Women in AI Fields (U.S. &amp; Global) and Political Context</a></li>
-  <li><a href="#wage-gaps-and-political-affiliation" id="toc-wage-gaps-and-political-affiliation"><span class="header-section-number">8</span> Wage Gaps and Political Affiliation</a></li>
-  <li><a href="#implications-for-job-seekers-2025" id="toc-implications-for-job-seekers-2025"><span class="header-section-number">9</span> Implications for Job Seekers (2025)</a></li>
-  <li><a href="#limitations" id="toc-limitations"><span class="header-section-number">10</span> Limitations</a></li>
-  <li><a href="#conclusion" id="toc-conclusion"><span class="header-section-number">11</span> Conclusion</a></li>
-  </ul>
-</nav>
+
 <section id="abstract" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Abstract</h1>
 <p>We analyze gender disparities in hiring, AI participation, and wages across U.S. industries and states, and situate these patterns in a global context. Drawing on recent federal statistics (<span class="citation" data-cites="bls2025cps"> (<a href="#ref-bls2025cps" role="doc-biblioref">Anon. (2025a)</a>)</span>), U.S. pay-gap trackers (<span class="citation" data-cites="aauw2025simpletruth">American Association of University Women (<a href="#ref-aauw2025simpletruth" role="doc-biblioref">(2025a)</a>)</span>; <span class="citation" data-cites="iwpr2024gap"> (<a href="#ref-iwpr2024gap" role="doc-biblioref">Anon. (2024a)</a>)</span>), and international reports (<span class="citation" data-cites="oecd2024algorithm"> (<a href="#ref-oecd2024algorithm" role="doc-biblioref">Anon. (2024b)</a>)</span>; <span class="citation" data-cites="ilo2023genai"> (<a href="#ref-ilo2023genai" role="doc-biblioref">Anon. (2023)</a>)</span>; <span class="citation" data-cites="ilo2025exposure"> (<a href="#ref-ilo2025exposure" role="doc-biblioref">Anon. (2025b)</a>)</span>; <span class="citation" data-cites="wef2025ggg"> (<a href="#ref-wef2025ggg" role="doc-biblioref">Anon. (2025c)</a>)</span>), we find persistent occupational segregation, widening U.S. annual earnings gaps since 2022, and continued underrepresentation of women in AI-intensive roles. State-level disparities correlate with policy environments such as pay-transparency and salary-history bans (<span class="citation" data-cites="aauw2025state">American Association of University Women (<a href="#ref-aauw2025state" role="doc-biblioref">(2025b)</a>)</span>), though industry composition and family structure are important confounders. Conservative/market-based perspectives emphasize occupational choice, hours, and career continuity as key mechanisms and warn that some transparency policies may compress wages (<span class="citation" data-cites="aei">American Enterprise Institute (<a href="#ref-aei" role="doc-biblioref">(2021)</a>)</span>; <span class="citation" data-cites="heritage">Heritage Foundation (<a href="#ref-heritage" role="doc-biblioref">(2024)</a>)</span>; <span class="citation" data-cites="cullen2021">Cullen and Pakzad-Hurson (<a href="#ref-cullen2021" role="doc-biblioref">(2021)</a>)</span>; <span class="citation" data-cites="cullen2023">Cullen (<a href="#ref-cullen2023" role="doc-biblioref">(2023)</a>)</span>; <span class="citation" data-cites="mas2014transparency">Mas (<a href="#ref-mas2014transparency" role="doc-biblioref">(2014)</a>)</span>). We integrate both views and outline implications for job seekers selecting sectors, geographies, and employers.</p>
@@ -219,14 +231,14 @@ div.csl-indent {
 <p>U.S. employment remains gender-segregated. CPS 2024 annual averages indicate women comprise roughly 47% of total employment but are more concentrated in health care, education, and service roles, with lower shares in construction, engineering, and portions of tech (<span class="citation" data-cites="bls2025cps"> (<a href="#ref-bls2025cps" role="doc-biblioref">Anon. (2025a)</a>)</span>). Internationally, the World Economic Forum (2025) estimates overall global gender parity at 68.8%, with economic participation parity at about 60–61%, implying persistent cross-country segmentation (<span class="citation" data-cites="wef2025ggg"> (<a href="#ref-wef2025ggg" role="doc-biblioref">Anon. (2025c)</a>)</span>). Market-oriented analyses argue that part of observed differences in outcomes reflect hours worked, occupation mix, and career continuity rather than like-for-like pay differences (<span class="citation" data-cites="aei">American Enterprise Institute (<a href="#ref-aei" role="doc-biblioref">(2021)</a>)</span>; <span class="citation" data-cites="heritage">Heritage Foundation (<a href="#ref-heritage" role="doc-biblioref">(2024)</a>)</span>).</p>
 </section>
 <section id="state-politics-and-gender-disparities-red-vs.-blue" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> State Politics and Gender Disparities (Red vs. Blue)</h1>
+<h1 data-number="6"><span class="header-section-number">6</span> State Politics and Gender Disparities (Red vs.&nbsp;Blue)</h1>
 <p>AAUW’s 2025 analysis shows that every U.S. state has a gender pay gap, with substantial dispersion across states (<span class="citation" data-cites="aauw2025state">American Association of University Women (<a href="#ref-aauw2025state" role="doc-biblioref">(2025b)</a>)</span>). Cross-state differences correlate with policy adoption such as salary-history bans and pay-transparency requirements, which are more prevalent in many blue states (<span class="citation" data-cites="aauw2025state">American Association of University Women (<a href="#ref-aauw2025state" role="doc-biblioref">(2025b)</a>)</span>). However, composition matters: industry mix (e.g., energy and construction), unionization, urbanization, and childcare access vary across states and can generate red–blue patterns without ideology being the sole driver. Earlier peer-reviewed work associates state liberalism with narrower gaps, but causality remains difficult to establish (<span class="citation" data-cites="maume2015state">Maume (<a href="#ref-maume2015state" role="doc-biblioref">(2015)</a>)</span>). Recent reporting suggests that post-pandemic return-to-office mandates have reduced flexibility and may contribute to widening national gaps, though these effects likely differ by state and sector (<span class="citation" data-cites="washingtonpost2025rto">The Washington Post (<a href="#ref-washingtonpost2025rto" role="doc-biblioref">(2025)</a>)</span>).</p>
 <section id="embedded-visualization-aauw-live-state-map" class="level2" data-number="6.1">
-<h2 data-number="6.1"><span class="header-section-number">6.1</span> Embedded visualization: AAUW live state map</h2>
+<h2 data-number="6.1" class="anchored" data-anchor-id="embedded-visualization-aauw-live-state-map"><span class="header-section-number">6.1</span> Embedded visualization: AAUW live state map</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class='callout-icon'></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Note
@@ -270,13 +282,12 @@ Note
 <section id="conclusion" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Conclusion</h1>
 <p>Gender disparities in hiring, AI participation, and pay persist across the U.S. and globally. State policies and employer practices shape observed gaps, but composition and choice also matter. A pragmatic job-search strategy in 2025 combines sector targeting, AI-adjacent upskilling, careful geography selection, and screening for transparent, flexible employers. Continuous measurement using CPS updates, AAUW/IWPR dashboards, and international benchmarks will be essential for tracking progress.</p>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden" data-render-id="quarto-int-sidebar-title">Job Market Analysis 2024</span> <span class="hidden" data-render-id="quarto-int-navbar-title">Job Market Analysis 2024</span> <span class="hidden" data-render-id="quarto-int-navbar:Home">Home</span> <span class="hidden" data-render-id="quarto-int-navbar:/index.html">/index.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Introduction">Introduction</span> <span class="hidden" data-render-id="quarto-int-navbar:/introduction.html">/introduction.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Data Cleaning &amp; Exploration">Data Cleaning &amp; Exploration</span> <span class="hidden" data-render-id="quarto-int-navbar:/data_cleaning.html">/data_cleaning.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Exploratory Data Analysis">Exploratory Data Analysis</span> <span class="hidden" data-render-id="quarto-int-navbar:/eda.html">/eda.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Skill Gap Analysis">Skill Gap Analysis</span> <span class="hidden" data-render-id="quarto-int-navbar:/skill_gap_analysis.html">/skill_gap_analysis.html</span> <span class="hidden" data-render-id="quarto-int-navbar:ML Methods">ML Methods</span> <span class="hidden" data-render-id="quarto-int-navbar:/ml_methods.html">/ml_methods.html</span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden" data-render-id="quarto-metatitle">Job Market Analysis 2024 - Gender Disparities in Hiring &amp; Political Influence (U.S. and Global, 2024–2025)</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Job Market Analysis 2024 - Gender Disparities in Hiring &amp; Political Influence (U.S. and Global, 2024–2025)</span> <span class="hidden" data-render-id="quarto-ogcardtitle">Job Market Analysis 2024 - Gender Disparities in Hiring &amp; Political Influence (U.S. and Global, 2024–2025)</span> <span class="hidden" data-render-id="quarto-metasitename">Job Market Analysis 2024</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-aauw2025simpletruth" class="csl-entry" role="listitem">
 <span class="smallcaps">American Association of University Women</span>. (2025a): <span>“<a href="https://www.aauw.org/resources/research/simple-truth/">The Simple Truth about the Gender Pay Gap 2025</a>,”</span>
 </div>
@@ -328,11 +339,8 @@ Note
 <div id="ref-washingtonpost2025rto" class="csl-entry" role="listitem">
 <span class="smallcaps">The Washington Post</span>. (2025): <span>“<a href="https://www.washingtonpost.com/business/2025/10/11/rto-mandates-gender-wage-gap/">Women Are Taking Pay Cuts as Companies Mandate Return to Office</a>,”</span>
 </div>
-</div>
-</section>
-
-</main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -721,6 +729,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
