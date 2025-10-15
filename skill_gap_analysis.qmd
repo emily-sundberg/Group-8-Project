@@ -2,7 +2,6 @@
 title: "Skills Gap Analysis"
 format:
   html:
-    theme: cerulean
     toc: false
 
 execute:
