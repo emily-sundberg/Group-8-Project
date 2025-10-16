@@ -432,7 +432,7 @@ div.csl-indent {
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the dataset</h2>
 <p>This code initializes a PySpark environment to load and explore a dataset of job postings. It begins by importing and starting a Spark session named “<code>JobPostingsAnalysis</code>”, then reads a CSV file (<code>lightcast_job_postings.csv</code>) into a Spark DataFrame with headers, schema inference, and support for multi-line fields. The DataFrame is registered as a temporary SQL view called “<code>job_postings</code>” to enable SQL-style queries. Finally, it performs a basic diagnostic check by printing the schema and previewing the first five rows of data—steps that are intended for local debugging and should be commented out when rendering the final submission.</p>
-<div id="d9ede1e8" class="cell" data-execution_count="1">
+<div id="07df2c00" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -469,7 +469,7 @@ div.csl-indent {
 <section id="data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <p>The following code cleans and standardizes the job postings dataset — ensuring proper data types, filling missing salaries, removing duplicates, categorizing remote types, and dropping overly sparse columns — to produce a clean, analysis-ready DataFrame.</p>
-<div id="da4c54eb" class="cell" data-execution_count="2">
+<div id="6c5a647f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># casting corrected variable type</span></span>
@@ -554,7 +554,7 @@ div.csl-indent {
 </details>
 </div>
 <p>This part of the script joins in another data frame that has the 2024 presidential election results by state. This allows us to use the states’ political affiliation as an attribute of the job posting.</p>
-<div id="f5b37deb" class="cell" data-execution_count="3">
+<div id="1176e5b4" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
@@ -577,7 +577,7 @@ div.csl-indent {
 </details>
 </div>
 <p>Now, this script selects only the columns we want to look at specifically</p>
-<div id="f2f29f8a" class="cell" data-execution_count="4">
+<div id="886df969" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>selected_df <span class="op">=</span> jobs_df.select(</span>
@@ -622,7 +622,7 @@ div.csl-indent {
 </details>
 </div>
 <p>Once we have the columns we want to look at, we create a heat map to show us the remaining missing values. We have already dealt with a lot of missing values earlier, but this will help us visualize what is left.</p>
-<div id="fa7dd1dc" class="cell" data-execution_count="5">
+<div id="bbaa292d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -662,7 +662,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="650" src="./output/missing_heatmap.html" title="Missing Values Heatmap"></iframe>
 <p>As you can see above, the missing values are mainly in the columns for minimum years of experience, and MSA name. The following script cleans up some of the column values and replaces missing values with an appropriate substitute such as 0 or “unknown”.</p>
-<div id="b1a81de9" class="cell" data-execution_count="6">
+<div id="202ff93b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> countDistinct</span>
@@ -792,7 +792,7 @@ div.csl-indent {
 </details>
 </div>
 <p>Finally, we have a clean dataset so we will convert it to a pandas dataframe and save it a csv.</p>
-<div id="353571d9" class="cell" data-execution_count="7">
+<div id="e9a3669c" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> selected_df.toPandas()</span>
@@ -804,7 +804,7 @@ div.csl-indent {
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Data Cleaning Complete. Rows retained:"</span>, <span class="bu">len</span>(pdf))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="20fd0b5c" class="cell" data-execution_count="8">
+<div id="91f37f1b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -836,7 +836,7 @@ div.csl-indent {
 </section>
 <section id="exploring-the-salary-by-state-political-affiliation" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-salary-by-state-political-affiliation">Exploring the Salary by State Political Affiliation</h2>
-<div id="f28983d1" class="cell" data-execution_count="9">
+<div id="7eff7462" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
@@ -895,7 +895,7 @@ div.csl-indent {
 </section>
 <section id="exploring-the-minimum-education-level-by-political-affiliation" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-minimum-education-level-by-political-affiliation">Exploring the minimum education level by political affiliation</h2>
-<div id="306c8766" class="cell" data-execution_count="10">
+<div id="33f64c7c" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -938,7 +938,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="650" src="./output/education_affiliation.html" title="Min Education Levels by State Political Affiliation"></iframe>
 <p>This graph shows us the comparison of job postings by political affiliation and minimum education level. As you can see, red states have far more job postings for lower education levels such as High School, Associate Degree, or Bachelor’s degree, and blue states have more postings requiring a Master’s Degree or higher.</p>
-<div id="f1f0a040" class="cell" data-execution_count="11">
+<div id="7c273600" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -968,7 +968,7 @@ div.csl-indent {
 </section>
 <section id="ai-jobs-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="ai-jobs-analysis">AI Jobs Analysis</h2>
-<div id="fca0423d" class="cell" data-execution_count="12">
+<div id="9be391e6" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
@@ -994,7 +994,7 @@ div.csl-indent {
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>ai_jobs.select(<span class="st">"MIN_EDULEVELS_NAME"</span>,<span class="st">"LOT_OCCUPATION_NAME"</span>, <span class="st">"SKILLS_NAME"</span>, <span class="st">"SALARY"</span>, <span class="st">"STATE_ABBREVIATION"</span>,<span class="st">"AFFILIATION"</span>,<span class="st">"NAICS2_NAME"</span>,<span class="st">"NAICS3_NAME"</span>,<span class="st">"NAICS4_NAME"</span>,<span class="st">"NAICS5_NAME"</span>,<span class="st">"NAICS6_NAME"</span>).show(<span class="dv">10</span>, truncate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="653db327" class="cell" data-execution_count="13">
+<div id="40800845" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -1037,7 +1037,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="650" src="./output/AI_education_affiliation.html" title="AI Jobs by Min Education Levels and State Political Affiliation"></iframe>
 <p>This figure shows us the number of postings just with certain key words related to AI. It groups by education level and political affiliation. The graph tells us that the distribution of number of AI job postings across education level and affiliation mirrors that of the larger data set. Thus, AI jobs are not posted at any higher frequency across red or blue states than any other job.</p>
-<div id="b28618e8" class="cell" data-execution_count="14">
+<div id="b04f6e17" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -1064,7 +1064,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="650" src="./output/AI_salary_education_affiliation.html" title="AI Job Salaries by Min Education Levels and State Political Affiliation"></iframe>
 <p>Similarly, in this figure, AI Jobs show salary distributions equivalent to that of jobs in other industries. Like the general analysis, blue states offer higher salaries for AI jobs across each of education levels. Again, this is likely due to the higher cost of living in most blue states.</p>
-<div id="f8501f46" class="cell" data-execution_count="15">
+<div id="61f5bda7" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>state_counts <span class="op">=</span> (</span>
@@ -1113,7 +1113,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="900" src="./output/AI_byState.html" title="Number of AI Job Postings by State"></iframe>
 <p>This graph clearly shows that of the top 5 states with the most number of AI job postings, 4/5 of them are blue states.</p>
-<div id="a469bede" class="cell" data-execution_count="16">
+<div id="0e80868d" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -1146,7 +1146,7 @@ div.csl-indent {
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>ai_naics_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="a7d5d296" class="cell" data-execution_count="17">
+<div id="2bde6e8d" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -1175,7 +1175,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="900" src="./output/AI_industries.html" title="Number of AI Job Postings by Industry"></iframe>
 <p>This graph is showing us the number of job postings by NAICS. For AI jobs, the NAICS with the largest number of AI job postings. Computer Systems Design is predominate NAICS with consulting services coming in second.</p>
-<div id="6aded508" class="cell" data-execution_count="18">
+<div id="b7138941" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#eda.select("NAICS2_NAME").distinct().show(25, truncate = False)</span></span>
@@ -1198,7 +1198,7 @@ div.csl-indent {
 <span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>sorted_gender_jobs <span class="op">=</span> sorted_gender_jobs.toPandas()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="b8f1a7a3" class="cell" data-execution_count="19">
+<div id="e4967699" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
@@ -1242,7 +1242,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="900" src="./output/gender_and_industry.html" title="Industries With The Most Women vs Percent of Women in the Industry"></iframe>
 <p>The above graph has two different important features. First, it shows the top 10 industries for women on the bar chart, sorted by the overall number of women according the U.S. Bureau of Labor Statistics <span class="citation" data-cites="bls2025cps">Labor Statistics (<a href="#ref-bls2025cps" role="doc-biblioref">(2025)</a>)</span>. The second important feature is the line chart which shows the percentage of women in that field. As you can see, some of the most female dominated industries do not have very many women in them and some of the industries with the most women are heavily male dominated.</p>
-<div id="2b2d34e1" class="cell" data-execution_count="20">
+<div id="8c154d70" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
@@ -1300,7 +1300,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="900" src="./output/industry_gender_gap.html" title="Industries with the Most Number of People vs the Number of Women in Those Industries"></iframe>
 <p>The above figure shows the top 10 industries with the most number of employed individuals based on data from the U.S. Bureau of Labor Statistics <span class="citation" data-cites="bls2025cps">Labor Statistics (<a href="#ref-bls2025cps" role="doc-biblioref">(2025)</a>)</span>. The blue bars show the number of people in those industries, and the red bars show the number of women in the industry.</p>
-<div id="39589241" class="cell" data-execution_count="21">
+<div id="94ebbe94" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
@@ -1353,7 +1353,7 @@ div.csl-indent {
 </div>
 <iframe width="900" height="1500" src="./output/ai_gender.html" title="AI Industries and Female Representation"></iframe>
 <p>The above figure shows the representation of women in AI industries. It’s worth noting that not a single one is female dominated, the highest female representation coming from Computer Systems Analysis with 43% female. The majority of these industries are less than 30% female. This displays a clear underrepresentation of females in AI industries.</p>
-<div id="281065b8" class="cell" data-execution_count="22">
+<div id="2a3a58a4" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1383,7 +1383,7 @@ div.csl-indent {
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">#elections_df.show(5)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="3445e8e8" class="cell" data-execution_count="23">
+<div id="a88c9c34" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1403,7 +1403,7 @@ div.csl-indent {
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>df_skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="904e439e" class="cell" data-execution_count="24">
+<div id="9984260d" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -1415,7 +1415,7 @@ div.csl-indent {
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="0f24969a" class="cell" data-execution_count="25">
+<div id="3a926532" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view_cols = [</span></span>
@@ -1432,7 +1432,7 @@ div.csl-indent {
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   jobs_df.select(colname).distinct().show(60,truncate = False)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="dd7897e3" class="cell" data-execution_count="26">
+<div id="eeaee579" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
@@ -1545,7 +1545,7 @@ div.csl-indent {
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Final dataset: </span><span class="sc">{</span><span class="bu">len</span>(df_clean)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="7f5a8556" class="cell" data-execution_count="31">
+<div id="6926d150" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Political Leaning Classification (Fixed)</span></span>
