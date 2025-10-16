@@ -9,7 +9,7 @@ format:
 
 execute:
   echo: true
-  eval: true
+  eval: false
   output: true
   freeze: auto
 ---
