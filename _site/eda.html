@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -173,14 +193,21 @@ ul.task-list li input[type="checkbox"] {
 <iframe width="900" height="900" src="./output/AI_industries.html" title="Number of AI Job Postings by Industry"></iframe>
 <p>This graph is showing us the number of job postings by NAICS. For AI jobs, the NAICS with the largest number of AI job postings. Computer Systems Design is predominate NAICS with consulting services coming in second.</p>
 <iframe width="900" height="900" src="./output/gender_and_industry.html" title="Industries With The Most Women vs Percent of Women in the Industry"></iframe>
-<p>The above graph has two different important features. First, it shows the top 10 industries for women on the bar chart, sorted by the overall number of women according the U.S. Bureau of Labor Statistics. The second important feature is the line chart which shows the percentage of women in that field. As you can see, some of the most female dominated industries do not have very many women in them and some of the industries with the most women are heavily male dominated.</p>
+<p>The above graph has two different important features. First, it shows the top 10 industries for women on the bar chart, sorted by the overall number of women according the U.S. Bureau of Labor Statistics <span class="citation" data-cites="bls2025cps">Labor Statistics (<a href="#ref-bls2025cps" role="doc-biblioref">2025</a>)</span>. The second important feature is the line chart which shows the percentage of women in that field. As you can see, some of the most female dominated industries do not have very many women in them and some of the industries with the most women are heavily male dominated.</p>
 <iframe width="900" height="900" src="./output/industry_gender_gap.html" title="Industries with the Most Number of People vs the Number of Women in Those Industries"></iframe>
-<p>The above figure shows the top 10 industries with the most number of employed individuals based on data from the U.S. Bureau of Labor Statistics. The blue bars show the number of people in those industries, and the red bars show the number of women in the industry.</p>
+<p>The above figure shows the top 10 industries with the most number of employed individuals based on data from the U.S. Bureau of Labor Statistics <span class="citation" data-cites="bls2025cps">Labor Statistics (<a href="#ref-bls2025cps" role="doc-biblioref">2025</a>)</span>. The blue bars show the number of people in those industries, and the red bars show the number of women in the industry.</p>
+<iframe width="900" height="1500" src="./output/ai_gender.html" title="AI Industries and Female Representation"></iframe>
+<p>The above figure shows the representation of women in AI industries. It’s worth noting that not a single one is female dominated, the highest female representation coming from Computer Systems Analysis with 43% female. The majority of these industries are less than 30% female. This displays a clear underrepresentation of females in AI industries.</p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-bls2025cps" class="csl-entry" role="listitem">
+Labor Statistics, U. S. B. of. (2025). <em>Employed persons by detailed occupation, sex, race, and hispanic or latino ethnicity: Annual averages 2024</em>. <a href="https://www.bls.gov/cps/cpsaat11.htm">https://www.bls.gov/cps/cpsaat11.htm</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

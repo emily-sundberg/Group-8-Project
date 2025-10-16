@@ -10,7 +10,7 @@ format:
     code-fold: true
 ---
 
-# Gender Disparities in Hiring & Political Influence
+
 
 This research investigates the intersection of gender-based employment patterns and political geography in the United States.
 
@@ -26,11 +26,7 @@ We analyze gender representation and hiring trends across multiple sectors:
 - **Manufacturing**: Production, engineering, management
 - **Service Industries**: Retail, hospitality, education
 
-Key metrics examined:
-- Hiring rates by gender
-- Retention rates
-- Promotion patterns
-- Industry-specific barriers
+
 
 ### 2. Do gender-based employment disparities vary between red and blue states?
 
@@ -99,16 +95,6 @@ Comprehensive wage analysis examining:
 
 We expect this analysis will reveal that political geography influences gender-based employment outcomes, particularly in emerging high-wage sectors such as AI and technology. 
 
-## Methodology
 
-[Your data sources and analytical methods will go here]
-
-## Data Visualizations
-
-[Interactive charts and graphs will be added here]
-
-## Conclusions
-
-[Research findings will be presented here]
 
 ---

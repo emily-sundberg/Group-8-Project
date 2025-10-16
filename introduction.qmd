@@ -3,7 +3,7 @@
 title: "Gender Disparities in Hiring & Political Influence (U.S. and Global, 2024–2025)"
 author:
   - "Pranathi Nagasai Andhe"
-  - "Emily Sunderberg"
+  - "Emily Sundberg"
 date: today
 format:
   html:
