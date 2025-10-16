@@ -6,9 +6,9 @@ author:
     - name: "Pranathi Nagasai & Emily Sundberg"
 affiliations:
     - id: BU
-         name: Boston University
-         city: Boston
-         state: MA
+    - name: Boston University
+    - city: Boston
+    - state: MA
 date: today
 date-modified: today
 date-format: long
