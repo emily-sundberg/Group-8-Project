@@ -1,6 +1,6 @@
 ---
 title: "Gender Disparities in Hiring & Political Influence"
-author: "Pranathi Nagasai & Team"
+author: "Pranathi Nagasai & Emily Sundberg"
 date: today
 format:
   html:
