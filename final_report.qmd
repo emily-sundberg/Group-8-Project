@@ -22,14 +22,7 @@ execute:
   freeze: auto
 ---
 
-# Gender and Politics in the Job Market
-## Final Report
 
-**Authors:** Pranathi Nagasai & Emily Sundberg  
-**Affiliation:** Boston University  
-**Date:** `r format(Sys.Date(), "%B %d, %Y")`
-
-\newpage
 
 {{< include index.qmd >}}
 {{< include introduction.qmd >}}
